@@ -50,6 +50,8 @@ public class Main {
         System.out.println("1. Perder peso");
         System.out.println("2. Ganar músculo");
         System.out.println("3. Mantenerse en forma");
+        System.out.println("4. Mejorar la resistencia");
+        System.out.println("5. Aumentar la flexibilidad");
 
         int option = sc.nextInt();
         sc.nextLine();
@@ -66,6 +68,11 @@ public class Main {
             case 3:
                 mainGoal = "Mantenerse en forma";
                 break;
+            case 4:
+                mainGoal = "Mejorar la resistencia";
+                break;
+            case 5:
+                mainGoal = "Aumentar la flexibilidad";
             default:
                 System.out.println("Opción inválida");
         }
@@ -80,6 +87,7 @@ public class Main {
             System.out.println("1. Reducir estrés");
             System.out.println("2. Mejorar sueño");
             System.out.println("3. Aumentar energía");
+            System.out.println("4. ");
             System.out.println("0. Terminar");
 
             choice = sc.nextInt();
