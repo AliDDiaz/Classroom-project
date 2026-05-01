@@ -73,6 +73,7 @@ public class Main {
                 break;
             case 5:
                 mainGoal = "Aumentar la flexibilidad";
+                break;
             default:
                 System.out.println("Opción inválida");
         }
@@ -87,7 +88,7 @@ public class Main {
             System.out.println("1. Reducir estrés");
             System.out.println("2. Mejorar sueño");
             System.out.println("3. Aumentar energía");
-            System.out.println("4. ");
+            System.out.println("4. Desarrollar hábitos saludables");
             System.out.println("0. Terminar");
 
             choice = sc.nextInt();
@@ -103,6 +104,8 @@ public class Main {
                 case 3:
                     service.addSecondaryGoal(id, "Aumentar energía");
                     break;
+                case 4:
+                    service.addSecondaryGoal(id, "Desarrollar hábitos saludables");
                 case 0:
                     System.out.println("Finalizando selección...");
                     break;
