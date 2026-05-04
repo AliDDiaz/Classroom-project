@@ -44,7 +44,19 @@ public class UserService {
         return repository.deleteByCode(id);
 
     }
-
+    public void updateWeight(double weight,int id){
+        if(weight==0){
+            System.out.println("Peso Imposible");
+        }
+        else {
+            if(repository.weightUpdater(weight,id)){
+                System.out.println("Actualizado correctamente");
+            }
+            else {
+                System.out.println("No fue posible actualizar el peso");
+            }
+        }
+    }
     public void assignMainGoal(int userId, String goal){
         User user = repository.findByCode(userId);
 

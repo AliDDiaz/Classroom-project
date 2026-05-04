@@ -12,7 +12,7 @@ public class Main {
         UserService service = new UserService();
 
         System.out.println("🤖 Hola, soy tu entrenador personal");
-
+        System.out.println("Permiteme conocerte mejor querid@ Usuari@");
         // REGISTRO
         System.out.print("ID: ");
         int id = sc.nextInt();
@@ -45,6 +45,33 @@ public class Main {
             return;
         }
 
+        int op=1;
+        do {
+            System.out.println("BIENVENIDO AL PROGRAMA");
+            System.out.println("1. Seleccionar Objetivos");
+            System.out.println("2. Configuraciones");
+            System.out.println("0. Salir y resumir");
+            System.out.print("Opcion: ");
+            op= sc.nextInt();
+            switch (op){
+                case 1:menuGoal(sc,service,id);
+                    break;
+                case 2:menuUser(sc,service,id);
+                    break;
+                default:
+                    System.out.println("Opción inválida");
+
+            }
+
+        }while(op!=0);
+
+        // MOSTRAR RESULTADO
+        User savedUser = service.findUser(id);
+
+        System.out.println("\n📋 Datos del usuario:");
+        System.out.println(savedUser);
+    }
+    static void menuGoal(Scanner sc,UserService service,int id){
         // OBJETIVO PRINCIPAL
         System.out.println("\nSelecciona tu objetivo principal:");
         System.out.println("1. Perder peso");
@@ -52,7 +79,7 @@ public class Main {
         System.out.println("3. Mantenerse en forma");
         System.out.println("4. Mejorar la resistencia");
         System.out.println("5. Aumentar la flexibilidad");
-
+        System.out.print("Opcion: ");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -90,7 +117,7 @@ public class Main {
             System.out.println("3. Aumentar energía");
             System.out.println("4. Desarrollar hábitos saludables");
             System.out.println("0. Terminar");
-
+            System.out.print("Opcion: ");
             choice = sc.nextInt();
             sc.nextLine();
 
@@ -114,11 +141,36 @@ public class Main {
             }
 
         } while (choice != 0);
-
-        // MOSTRAR RESULTADO
-        User savedUser = service.findUser(id);
-
-        System.out.println("\n📋 Datos del usuario:");
-        System.out.println(savedUser);
     }
+    static void menuUser(Scanner in,UserService service,int code){
+        double weight;
+        int op=1;
+        do {
+            System.out.println("Bienvenido a las configuraciones Usuario#"+code);
+            System.out.println("Ha seleccionado el menu de actuailizacion de Usuario");
+            System.out.println("1. cambiar peso");
+            System.out.println("2. cambiar objetivos");
+            System.out.print("Opcion: ");
+            op=in.nextInt();
+            switch (op){
+                case 1:
+                    User savedUser = service.findUser(code);
+                    System.out.print("Peso registrado:"+savedUser.getWeight());
+                    System.out.print("Peso actual:");
+                    weight= in.nextDouble();
+                    service.updateWeight(weight,code);
+                    break;
+                case 2:
+                    menuGoal(in,service,code);
+                    break;
+                default:
+                    System.out.println("Opción inválida");
+
+            }
+        }while(op!= 0);
+
+
+
+    }
+
 }

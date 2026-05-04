@@ -42,8 +42,17 @@ public class UserRepository {
 
     public boolean deleteByCode(int code){
 
-    return list.removeIf(s -> s.getId() == code);
+        return list.removeIf(s -> s.getId() == code);
 
+    }
+    public boolean weightUpdater(double newWeight,int code){
+        for(User u:list){
+            if(u.getId()==code){
+                u.setWeight(newWeight);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
