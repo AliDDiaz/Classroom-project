@@ -148,7 +148,7 @@ public class Main {
         System.out.println("INFORMACION REGISTRADA DE USUARIO:");
         showDataUser(service,code);
         double weight;
-        int op=1;
+        int op;
         do {
             System.out.println("Bienvenido a las configuraciones Usuario#"+code);
             System.out.println("Ha seleccionado el menu de actuailizacion de Usuario");
