@@ -65,9 +65,11 @@ public class Main {
 
         }while(op!=0);
 
-        // MOSTRAR RESULTADO
+        // INVOCACION
+        showDataUser(service,id);
+    }
+    static void showDataUser(UserService service,int id){
         User savedUser = service.findUser(id);
-
         System.out.println("\n📋 Datos del usuario:");
         System.out.println(savedUser);
     }
@@ -143,6 +145,8 @@ public class Main {
         } while (choice != 0);
     }
     static void menuUser(Scanner in,UserService service,int code){
+        System.out.println("INFORMACION REGISTRADA DE USUARIO:");
+        showDataUser(service,code);
         double weight;
         int op=1;
         do {
