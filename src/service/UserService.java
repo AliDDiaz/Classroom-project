@@ -11,15 +11,28 @@ public class UserService {
 
     public boolean registerUser(User user){
 
-        if(user.getAge() <= 0){
+        if(user.getAge() <= 0 || user.getAge() > 120){
+            System.out.println("Edad inválida. Intente nuevamente.");
+            return false;
+        }
+
+        if(user.getWeight() <= 0){
+            System.out.println("Peso inválido. Intente nuevamente.");
+            return false;
+        }
+
+        if(user.getHeight() <= 0){
+            System.out.println("Altura inválida. Intente nuevamente.");
             return false;
         }
 
         if(user.getName() == null || user.getName().isEmpty()){
+            System.out.println("Nombre inválido. Intente nuevamente.");
             return false;
         }
 
         if(repository.findByCode(user.getId()) != null){
+            System.out.println("El usuario ya existe.");
             return false;
         }
 
@@ -45,7 +58,7 @@ public class UserService {
 
     }
     public void updateWeight(double weight,int id){
-        if(weight==0){
+        if(weight <= 0){
             System.out.println("Peso Imposible");
         }
         else {
