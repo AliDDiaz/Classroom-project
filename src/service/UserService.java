@@ -40,6 +40,45 @@ public class UserService {
         return true;
     }
 
+    public double calculateBMI(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user != null){
+
+            return user.getWeight() / (user.getHeight() * user.getWeight());
+        }
+
+        return 0;
+
+    }
+
+    public String bmiRecommendation(int id){
+
+        double bmi = calculateBMI(id);
+
+        if(bmi < 18.5){
+
+            return "Tu IMC indica bajo peos." + "Se recomienda mejorar la " +
+                    "alimentación y seguri una rutina moderada.";
+        } else if(bmi < 25) {
+
+            return "Tu IMC es normal. Continúa manteniendo hábitos saludables.";
+
+        } else if(bmi < 30) {
+
+            return "Tu IMC indica sobrepeso." +
+                    "Se recomienda realizar actividad caridovascular.";
+
+        } else {
+
+            return "Tu IMC indica obesidad. Se recomienda consultar " +
+                    "un especialista y realizar actividad física controlada.";
+
+        }
+
+    }
+
     public ArrayList<User> getAllUser(){
 
         return repository.getAll();

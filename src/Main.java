@@ -67,8 +67,15 @@ public class Main {
 
     static void showDataUser(UserService service,int id){
         User savedUser = service.findUser(id);
+
         System.out.println("\n📋 Datos del usuario:");
         System.out.println(savedUser);
+
+        double bmi = service.calculateBMI(id);
+
+        System.out.printf("IMC: %2f%n", bmi);
+
+        System.out.println(service.bmiRecommendation(id));
     }
     static void menuGoal(Scanner sc,UserService service,int id){
         // OBJETIVO PRINCIPAL
