@@ -1,6 +1,6 @@
 package service;
 
-import entities.User;
+import entities.*;
 import repositories.UserRepository;
 
 import java.util.ArrayList;
@@ -144,57 +144,29 @@ public class UserService {
             return "Usuario no encontrado.";
         }
 
-        String routine = "";
+        Routine routine;
 
         // OBJETIVO PRINCIPAL
         switch (user.getMainGoal()){
 
             case "Perder peso":
-                routine += """
-                    
-                    Rutina principal:
-                    - Cardio 30 minutos
-                    - Caminata rápida
-                    - Bicicleta
-                    """;
+                routine = new WeightLossRoutine();
                 break;
 
             case "Ganar músculo":
-                routine += """
-                    
-                    Rutina principal:
-                    - Pesas
-                    - Flexiones
-                    - Sentadillas
-                    """;
+                routine = new MuscleGainRoutine();
                 break;
 
             case "Mantenerse en forma":
-                routine += """
-                    
-                    Rutina principal:
-                    - Trote suave
-                    - Estiramientos
-                    """;
-                break;
+                routine = new StayingFitRoutine();
+                    break;
 
             case "Mejorar la resistencia":
-                routine += """
-                    
-                    Rutina principal:
-                    - Running
-                    - Circuitos HIIT
-                    """;
+                routine = new ImproveResistenceRoutine();
                 break;
 
             case "Aumentar la flexibilidad":
-                routine += """
-                    
-                    Rutina principal:
-                    - Yoga
-                    - Pilates
-                    - Estiramientos diarios
-                    """;
+                routine = new IncreaseFlexibilityRoutine();
                 break;
         }
 
