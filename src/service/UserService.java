@@ -168,34 +168,22 @@ public class UserService {
             case "Aumentar la flexibilidad":
                 routine = new IncreaseFlexibilityRoutine();
                 break;
+
+            default:
+                return "No hay rutina disponible.";
         }
 
+        String routineText = "Rutina principal:\n";
+        routineText += routine.generateRoutine();
         // OBJETIVOS SECUNDARIOS
-        routine += "\nRecomendaciones adicionales:\n";
+        routineText += "\nRecomendaciones adicionales:\n";
+        for(SecondaryGoals goal : user.getSecondaryGoals()){
 
-        for(String goal : user.getSecondaryGoals()){
+            routineText += goal.getRecommendation() + "\n";
 
-            switch (goal){
-
-                case "Reducir estrés":
-                    routine += "- Meditación 10 minutos\n";
-                    break;
-
-                case "Mejorar sueño":
-                    routine += "- Dormir mínimo 8 horas\n";
-                    break;
-
-                case "Aumentar energía":
-                    routine += "- Mantener buena hidratación\n";
-                    break;
-
-                case "Desarrollar hábitos saludables":
-                    routine += "- Mantener horarios constantes\n";
-                    break;
-            }
         }
 
-        return routine;
+        return routineText;
     }
 
     public ArrayList<User> getAllUser(){
@@ -236,19 +224,23 @@ public class UserService {
         }
     }
 
-    public void addSecondaryGoal(int userId, String goal){
+    public void addSecondaryGoal(int userId, SecondaryGoals goal){
+
         User user = repository.findByCode(userId);
 
         if (user != null){
 
-            if(!user.getSecondaryGoals().contains(goal)){
-                user.getSecondaryGoals().add(goal);
-            } else {
+            for(SecondaryGoals g : user.getSecondaryGoals()){
 
-                System.out.println("Ese objetivo ya fue agregado.");
+                if(g.getName().equalsIgnoreCase(goal.getName())){
+
+                    System.out.println("Ese objetivo ya fue agregado.");
+                    return;
+                }
             }
 
+            user.getSecondaryGoals().add(goal);
+            System.out.println("Objetivo agregado correctamente.");
         }
     }
-
 }

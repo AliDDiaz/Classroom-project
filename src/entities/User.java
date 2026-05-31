@@ -12,11 +12,11 @@ public class User {
     private String gender;
 
     private String mainGoal;
-    private ArrayList<String> secondaryGoals;
+    private ArrayList<SecondaryGoals> secondaryGoals;
     private ArrayList<Double> weightHistory;
 
     public User(int id, String name, int age, double weight, double height, String gender,
-                String mainGoal, ArrayList<String> secondaryGoals, ArrayList<Double> weightHistory) {
+                String mainGoal, ArrayList<SecondaryGoals> secondaryGoals, ArrayList<Double> weightHistory) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -84,11 +84,11 @@ public class User {
         this.mainGoal = mainGoal;
     }
 
-    public ArrayList<String> getSecondaryGoals() {
+    public ArrayList<SecondaryGoals> getSecondaryGoals() {
         return secondaryGoals;
     }
 
-    public void setSecondaryGoals(ArrayList<String> secondaryGoals) {
+    public void setSecondaryGoals(ArrayList<SecondaryGoals> secondaryGoals) {
         this.secondaryGoals = secondaryGoals;
     }
 

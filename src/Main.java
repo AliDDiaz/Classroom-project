@@ -1,5 +1,5 @@
+import entities.*;
 import service.UserService;
-import entities.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -143,16 +143,16 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    service.addSecondaryGoal(id, "Reducir estrés");
+                    service.addSecondaryGoal(id, new StressReductionGoal());
                     break;
                 case 2:
-                    service.addSecondaryGoal(id, "Mejorar sueño");
+                    service.addSecondaryGoal(id, new SleepImprovementGoal());
                     break;
                 case 3:
-                    service.addSecondaryGoal(id, "Aumentar energía");
+                    service.addSecondaryGoal(id, new EnergyBoostGoal());
                     break;
                 case 4:
-                    service.addSecondaryGoal(id, "Desarrollar hábitos saludables");
+                    service.addSecondaryGoal(id, new HealthyHabitsGoal());
                     break;
                 case 0:
                     System.out.println("Finalizando selección...");
