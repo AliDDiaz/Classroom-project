@@ -13,9 +13,10 @@ public class User {
 
     private String mainGoal;
     private ArrayList<String> secondaryGoals;
+    private ArrayList<Double> weightHistory;
 
     public User(int id, String name, int age, double weight, double height, String gender,
-                String mainGoal, ArrayList<String> secondaryGoals) {
+                String mainGoal, ArrayList<String> secondaryGoals, ArrayList<Double> weightHistory) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -24,6 +25,7 @@ public class User {
         this.gender = gender;
         this.mainGoal = mainGoal;
         this.secondaryGoals = secondaryGoals;
+        this.weightHistory = weightHistory;
     }
 
     public int getId() {
@@ -88,6 +90,14 @@ public class User {
 
     public void setSecondaryGoals(ArrayList<String> secondaryGoals) {
         this.secondaryGoals = secondaryGoals;
+    }
+
+    public ArrayList<Double> getWeightHistory() {
+        return weightHistory;
+    }
+
+    public void setWeightHistory(ArrayList<Double> weightHistory) {
+        this.weightHistory = weightHistory;
     }
 
     @Override

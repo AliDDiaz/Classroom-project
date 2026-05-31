@@ -27,7 +27,10 @@ public class Main {
 
         String gender = readValidGender(sc);
 
-        User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>());
+        ArrayList<Double> history = new ArrayList<>();
+        history.add(weight);
+
+        User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>(), history);
 
         boolean created = service.registerUser(user);
 
@@ -81,7 +84,7 @@ public class Main {
         } else {
             System.out.println(service.generateRoutine(id));
         }
-        
+
         double calories = service.calculateCalories(id);
 
         System.out.printf("Calorías diarias estimadas: %.2f kcal\n", calories);
