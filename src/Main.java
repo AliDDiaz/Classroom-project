@@ -81,6 +81,11 @@ public class Main {
         } else {
             System.out.println(service.generateRoutine(id));
         }
+        
+        double calories = service.calculateCalories(id);
+
+        System.out.printf("Calorías diarias estimadas: %.2f kcal\n", calories);
+        System.out.println(service.caloriesRecommendation(id));
 
     }
     static void menuGoal(Scanner sc,UserService service,int id){

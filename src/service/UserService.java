@@ -79,6 +79,62 @@ public class UserService {
 
     }
 
+    //Función para calcular calorías diarias
+    public double calculateCalories(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user == null){
+            return 0;
+        }
+
+        double weight = user.getWeight();
+        double height = user.getHeight() * 100;
+        int age = user.getAge();
+
+        double tmb;
+
+        if(user.getGender().equalsIgnoreCase("Masculino")){
+
+            tmb = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+        } else {
+
+            tmb = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+        }
+
+        return tmb * 1.55;
+    }
+
+    public String caloriesRecommendation(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user == null){
+            return "Usuario no encontrado";
+        }
+
+        double calories = calculateCalories(id);
+
+        switch(user.getMainGoal()){
+
+            case "Perder peso":
+                return "Para perder peso se recomienda consumir aproximadamente "
+                        + (int)(calories - 400) + "kcal diarias.";
+
+            case "Ganar músculo":
+                return "Para ganar músculo se recomienda consumir aproximadamente "
+                        + (int)(calories + 300) + "kcal diarias.";
+
+            case "Mantenerse en forma":
+                return "Para mantenerse en forma se recomienda consumir aproximadamente"
+                        + (int)(calories) + "kcal diarias.";
+
+            default:
+                return "Consumo recomendado aproximado: "
+                        + (int)(calories) +"kcal diarias.";
+        }
+    }
+
     //Función que genera las rutinas
     public String generateRoutine(int id){
 
