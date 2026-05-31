@@ -92,15 +92,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", weight=" + weight +
-                ", height=" + height +
-                ", gender='" + gender + '\'' +
-                ", mainGoal='" + mainGoal + '\'' +
-                ", secondaryGoals=" + secondaryGoals +
-                '}';
+        return "ID=" + id +
+                "\nNombre: " + name +
+                "\nEdad: " + age +
+                "\nPeso: " + weight +
+                "\nAltura: " + height +
+                "\nGénero: " + gender +
+                "\nObjetivo principal: " + mainGoal +
+                "\nObjetivos secundarios: " + secondaryGoals;
     }
 }

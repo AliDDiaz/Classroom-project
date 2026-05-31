@@ -71,11 +71,17 @@ public class Main {
         System.out.println("\n📋 Datos del usuario:");
         System.out.println(savedUser);
 
-        double bmi = service.calculateBMI(id);
+        double imc = service.calculateIMC(id);
 
-        System.out.printf("IMC: %2f%n", bmi);
+        System.out.printf("IMC: %.2f\n", imc);
 
         System.out.println(service.bmiRecommendation(id));
+        if(savedUser.getMainGoal().isEmpty()){
+            System.out.println("\nNo seleccionaste objetivos.");
+        } else {
+            System.out.println(service.generateRoutine(id));
+        }
+
     }
     static void menuGoal(Scanner sc,UserService service,int id){
         // OBJETIVO PRINCIPAL
@@ -168,6 +174,7 @@ public class Main {
                     System.out.println("Peso registrado: " + savedUser.getWeight());
                     System.out.print("Peso actual: ");
                     weight= in.nextDouble();
+                    in.nextLine();
                     service.updateWeight(weight,code);
                     break;
                 case 2:

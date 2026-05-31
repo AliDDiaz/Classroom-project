@@ -40,13 +40,13 @@ public class UserService {
         return true;
     }
 
-    public double calculateBMI(int id){
+    public double calculateIMC(int id){
 
         User user = repository.findByCode(id);
 
         if(user != null){
 
-            return user.getWeight() / (user.getHeight() * user.getWeight());
+            return user.getWeight() / (user.getHeight() * user.getHeight());
         }
 
         return 0;
@@ -55,12 +55,12 @@ public class UserService {
 
     public String bmiRecommendation(int id){
 
-        double bmi = calculateBMI(id);
+        double bmi = calculateIMC(id);
 
         if(bmi < 18.5){
 
-            return "Tu IMC indica bajo peos." + "Se recomienda mejorar la " +
-                    "alimentación y seguri una rutina moderada.";
+            return "Tu IMC indica bajo peso." + "Se recomienda mejorar la " +
+                    "alimentación y seguir una rutina moderada.";
         } else if(bmi < 25) {
 
             return "Tu IMC es normal. Continúa manteniendo hábitos saludables.";
@@ -68,7 +68,7 @@ public class UserService {
         } else if(bmi < 30) {
 
             return "Tu IMC indica sobrepeso." +
-                    "Se recomienda realizar actividad caridovascular.";
+                    "Se recomienda realizar actividad cardiovascular.";
 
         } else {
 
@@ -77,6 +77,97 @@ public class UserService {
 
         }
 
+    }
+
+    //Función que genera las rutinas
+    public String generateRoutine(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user == null){
+            return "Usuario no encontrado.";
+        }
+
+        String routine = "";
+
+        // OBJETIVO PRINCIPAL
+        switch (user.getMainGoal()){
+
+            case "Perder peso":
+                routine += """
+                    
+                    Rutina principal:
+                    - Cardio 30 minutos
+                    - Caminata rápida
+                    - Bicicleta
+                    """;
+                break;
+
+            case "Ganar músculo":
+                routine += """
+                    
+                    Rutina principal:
+                    - Pesas
+                    - Flexiones
+                    - Sentadillas
+                    """;
+                break;
+
+            case "Mantenerse en forma":
+                routine += """
+                    
+                    Rutina principal:
+                    - Trote suave
+                    - Estiramientos
+                    """;
+                break;
+
+            case "Mejorar la resistencia":
+                routine += """
+                    
+                    Rutina principal:
+                    - Running
+                    - Circuitos HIIT
+                    """;
+                break;
+
+            case "Aumentar la flexibilidad":
+                routine += """
+                    
+                    Rutina principal:
+                    - Yoga
+                    - Pilates
+                    - Estiramientos diarios
+                    """;
+                break;
+        }
+
+        // OBJETIVOS SECUNDARIOS
+        routine += "\nRecomendaciones adicionales:\n";
+
+        for(String goal : user.getSecondaryGoals()){
+
+            switch (goal){
+
+                case "Reducir estrés":
+                    routine += "- Meditación 10 minutos\n";
+                    break;
+
+                case "Mejorar sueño":
+                    routine += "- Dormir mínimo 8 horas\n";
+                    break;
+
+                case "Aumentar energía":
+                    routine += "- Mantener buena hidratación\n";
+                    break;
+
+                case "Desarrollar hábitos saludables":
+                    routine += "- Mantener horarios constantes\n";
+                    break;
+            }
+        }
+
+        return routine;
     }
 
     public ArrayList<User> getAllUser(){
@@ -98,7 +189,7 @@ public class UserService {
     }
     public void updateWeight(double weight,int id){
         if(weight <= 0){
-            System.out.println("Peso Imposible");
+            System.out.println("Peso inválido");
         }
         else {
             if(repository.weightUpdater(weight,id)){
@@ -121,7 +212,14 @@ public class UserService {
         User user = repository.findByCode(userId);
 
         if (user != null){
-            user.getSecondaryGoals().add(goal);
+
+            if(!user.getSecondaryGoals().contains(goal)){
+                user.getSecondaryGoals().add(goal);
+            } else {
+
+                System.out.println("Ese objetivo ya fue agregado.");
+            }
+
         }
     }
 
