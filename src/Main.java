@@ -48,7 +48,15 @@ public class Main {
             System.out.println("2. Configuraciones");
             System.out.println("0. Salir y resumir");
             System.out.print("Opcion: ");
-            op= sc.nextInt();
+            try {
+
+                op = sc.nextInt();
+            }catch (Exception e){
+
+                System.out.println("Opción inválida.");
+                sc.nextLine();
+                op = -1;
+            }
             switch (op){
                 case 1:menuGoal(sc,service,id);
                     break;
@@ -100,8 +108,17 @@ public class Main {
         System.out.println("4. Mejorar la resistencia");
         System.out.println("5. Aumentar la flexibilidad");
         System.out.print("Opcion: ");
-        int option = sc.nextInt();
-        sc.nextLine();
+        int option;
+        try {
+
+            option = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e){
+
+            System.out.println("Debe ingresar un número.");
+            sc.nextLine();
+            option = -1;
+        }
 
         String mainGoal = "";
 
@@ -138,8 +155,17 @@ public class Main {
             System.out.println("4. Desarrollar hábitos saludables");
             System.out.println("0. Terminar");
             System.out.print("Opcion: ");
-            choice = sc.nextInt();
-            sc.nextLine();
+            try {
+
+                choice = sc.nextInt();
+                sc.nextLine();
+
+            }catch (Exception e){
+
+                System.out.println("Debe ingresar un número.");
+                sc.nextLine();
+                choice = -1;
+            }
 
             switch (choice) {
                 case 1:
@@ -175,15 +201,38 @@ public class Main {
             System.out.println("2. cambiar objetivos");
             System.out.println("0. Terminar");
             System.out.print("Opcion: ");
-            op=in.nextInt();
+            try {
+
+                op = in.nextInt();
+                in.nextLine();
+            }catch (Exception e){
+
+                System.out.println("Debe ingresar un número.");
+                in.nextLine();
+                op = -1;
+
+            }
             switch (op){
                 case 1:
                     User savedUser = service.findUser(code);
                     System.out.println("Peso registrado: " + savedUser.getWeight());
                     System.out.print("Peso actual: ");
-                    weight= in.nextDouble();
-                    in.nextLine();
-                    service.updateWeight(weight,code);
+
+                    try {
+
+                        weight = in.nextDouble();
+                        in.nextLine();
+                    }catch (Exception e){
+
+                        System.out.println("Debe ingresar un número válido.");
+                        in.nextLine();
+                        weight = -1;
+                    }
+
+                    if(weight > 0) {
+                        service.updateWeight(weight, code);
+                    }
+                    
                     break;
                 case 2:
                     menuGoal(in,service,code);
@@ -206,16 +255,24 @@ public class Main {
         int id;
         do {
             System.out.print("ID: ");
+            try {
+
             id = sc.nextInt();
             sc.nextLine();
 
-            if(id <= 0){
+            if (id <= 0) {
                 System.out.println("ID inválido.");
             }
-            if(service.findUser(id) != null){
+            if (service.findUser(id) != null) {
                 System.out.println("Ese ID ya existe.");
             }
 
+        } catch (Exception e){
+
+                System.out.println("Debe inggresar un número válido.");
+                sc.nextLine();
+                id = -1;
+            }
         }while(id <= 0 || service.findUser(id) != null);
 
         return id;
@@ -241,10 +298,20 @@ public class Main {
         int age;
         do {
             System.out.print("Edad: ");
-            age = sc.nextInt();
+            try {
 
-            if(age <= 0 || age > 120){
-                System.out.println("Edad inválida. Intente nuevamente.");
+                age = sc.nextInt();
+                sc.nextLine();
+
+                if (age <= 0 || age > 120) {
+                    System.out.println("Edad inválida. Intente nuevamente.");
+                }
+
+            }catch (Exception e){
+
+                System.out.println("Debe ingresar una edad válida.");
+                sc.nextLine();
+                age = -1;
             }
         }while(age <= 0 || age > 120);
 
@@ -256,9 +323,19 @@ public class Main {
         double weight;
         do {
             System.out.print("Peso (kg): ");
-            weight = sc.nextDouble();
-            if(weight <= 0){
-                System.out.println("Peso inválido. Intente nuevamente.");
+            try {
+
+                weight = sc.nextDouble();
+                sc.nextLine();
+                if (weight <= 0) {
+                    System.out.println("Peso inválido. Intente nuevamente.");
+                }
+
+            }catch (Exception e){
+
+                System.out.println("Debe ingresar un peso válido.");
+                sc.nextLine();
+                weight = -1;
             }
         }while(weight <= 0);
 
@@ -270,10 +347,19 @@ public class Main {
         double height;
         do {
             System.out.print("Altura (m): ");
-            height = sc.nextDouble();
-            sc.nextLine();
-            if(height <= 0){
-                System.out.println("Altura inválida. Intente nuevamente.");
+            try {
+
+                height = sc.nextDouble();
+                sc.nextLine();
+                if (height <= 0) {
+                    System.out.println("Altura inválida. Intente nuevamente.");
+                }
+
+            }catch (Exception e){
+
+                System.out.println("Debe ingresar una altura válida.");
+                sc.nextLine();
+                height = -1;
             }
         }while(height <= 0);
 
@@ -290,9 +376,18 @@ public class Main {
             System.out.println("1. Masculino");
             System.out.println("2. Femenino");
             System.out.print("Opción: ");
-            option = sc.nextInt();
-            sc.nextLine();
 
+            try {
+
+                option = sc.nextInt();
+                sc.nextLine();
+
+            }catch (Exception e){
+
+                System.out.println("Debe ingresar 1 0 2.");
+                sc.nextLine();
+                option = -1;
+            }
             switch (option){
 
                 case 1:
