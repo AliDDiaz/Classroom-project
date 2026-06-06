@@ -13,7 +13,65 @@ public class Main {
 
         System.out.println("🤖 Hola, soy tu entrenador personal");
         System.out.println("Permiteme conocerte mejor querid@ Usuari@");
-        // REGISTRO
+
+        int op;
+
+        do {
+
+            System.out.println("\n===== MENÚ PRINCIPAL =====");
+            System.out.println("1. Registrar usuario.");
+            System.out.println("2. Mostrar usuarios.");
+            System.out.println("3. Buscar usuario.");
+            System.out.println("4. Eliminar usuario.");
+            System.out.println("5. Ingresar a usuario.");
+            System.out.println("0. Salir.");
+            System.out.print("Opción: ");
+
+            try {
+                op = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e){
+
+                System.out.println("Debe ingresar un número.");
+                sc.nextLine();
+                op = -1;
+            }
+
+            switch(op){
+
+                case 1:
+                    registerUserMenu(sc, service);
+                    break;
+
+                case 2:
+                    showAllUsers(service);
+                    break;
+
+                case 3:
+                    searchUser(sc, service);
+                    break;
+
+                case 4:
+                    deleteUser(sc, service);
+                    break;
+
+                case 5:
+                    accessUser(sc, service);
+                    break;
+
+                case 0:
+                    System.out.println("Programa finalizado.");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+            }
+
+        }while(op != 0);
+
+    }
+
+    static void registerUserMenu(Scanner sc, UserService service){
 
         int id = readValidId(sc, service);
 
@@ -34,71 +92,283 @@ public class Main {
 
         boolean created = service.registerUser(user);
 
-        if (created) {
-            System.out.println("✅ Usuario registrado correctamente");
+        if(created){
+
+            System.out.println("Usuario registrado correctamente.");
         } else {
-            System.out.println("❌ Error al registrar usuario");
+
+            System.out.println("Error al registrar usuario.");
+
+        }
+    }
+
+    static void showAllUsers(UserService service){
+
+        ArrayList<User> users = service.getAllUser();
+
+        if(users.isEmpty()){
+
+            System.out.println("No hay usuarios registrados.");
             return;
         }
 
-        int op=1;
+        System.out.println("\n===== LISTA DE USUARIOS =====");
+
+        for(User user : users){
+
+            System.out.println("ID: " + user.getId() + " | Nombre: "
+                    + user.getName() + " | Edad: " + user.getAge());
+
+        }
+
+    }
+
+    static void searchUser(Scanner sc, UserService service){
+
+        int id;
+
+        System.out.println("Ingrese ID del usuario: ");
+
+        try {
+            id = sc.nextInt();
+            sc.nextLine();
+
+        }catch (Exception e){
+
+            System.out.println("Debe ingresar un número válido.");
+            sc.nextLine();
+            id = -1;
+        }
+
+        if(id > 0) {
+
+            User user = service.findUser(id);
+
+            if (user != null) {
+
+                System.out.println(user);
+
+            } else {
+
+                System.out.println("Usuario no encontrado.");
+
+            }
+
+        }
+
+    }
+
+    static void deleteUser(Scanner sc, UserService service){
+
+        int id;
+
+        System.out.println("Ingrese ID del usuario a eliminar: ");
+
+        try {
+            id = sc.nextInt();
+            sc.nextLine();
+
+        }catch (Exception e){
+
+            System.out.println("Debe ingresar un número válido.");
+            sc.nextLine();
+            id = -1;
+        }
+
+        if(id > 0) {
+            if (service.deleteUser(id)) {
+
+                System.out.println("Usuario eliminado.");
+
+            } else {
+
+                System.out.println("No existe un usuario con ese ID.");
+
+            }
+
+        }
+
+    }
+
+    static void accessUser(Scanner sc, UserService service){
+
+        int id;
+
+        System.out.print("Ingrese ID del usuario: ");
+
+        try {
+
+            id = sc.nextInt();
+            sc.nextLine();
+
+        } catch (Exception e){
+
+            System.out.println("Debe ingresar un número válido.");
+            sc.nextLine();
+            return;
+        }
+
+        User user = service.findUser(id);
+
+        if(user == null){
+
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        int op;
+
         do {
-            System.out.println("BIENVENIDO AL PROGRAMA");
-            System.out.println("1. Seleccionar Objetivos");
-            System.out.println("2. Configuraciones");
-            System.out.println("0. Salir y resumir");
-            System.out.print("Opcion: ");
+
+            System.out.println("\n===== MENÚ DE USUARIO =====");
+            System.out.println("1. Ver información completa");
+            System.out.println("2. Ver salud y recomendaciones");
+            System.out.println("3. Configuraciones");
+            System.out.println("4. Objetivos");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+
             try {
 
                 op = sc.nextInt();
-            }catch (Exception e){
+                sc.nextLine();
 
-                System.out.println("Opción inválida.");
+            } catch (Exception e){
+
+                System.out.println("Debe ingresar un número.");
                 sc.nextLine();
                 op = -1;
             }
-            switch (op){
-                case 1:menuGoal(sc,service,id);
-                    break;
-                case 2:menuUser(sc,service,id);
-                    break;
-                case 0:
-                    System.out.println("Programa finalizado. Gracias por usar nuestros servicios.");
-                    break;
-                default:
-                    System.out.println("Opción inválida");
 
+            switch (op){
+
+                case 1:
+                    showDataUser(service, id);
+                    break;
+
+                case 2:
+                    showHealthData(service, id);
+                    break;
+
+                case 3:
+                    menuUser(sc, service, id);
+                    break;
+
+                case 4:
+                    goalsMenu(sc, service, id);
+                    break;
+
+                case 0:
+                    System.out.println("Saliendo...");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
             }
 
-        }while(op!=0);
+        }while(op != 0);
 
-        // INVOCACION
-        showDataUser(service,id);
     }
 
-    static void showDataUser(UserService service,int id){
+    static void showDataUser(UserService service, int id){
+
         User savedUser = service.findUser(id);
 
-        System.out.println("\n📋 Datos del usuario:");
+        if(savedUser == null){
+
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        System.out.println("\n===== INFORMACIÓN DEL USUARIO =====");
         System.out.println(savedUser);
+
+    }
+
+    static void showHealthData(UserService service, int id){
+
+        User savedUser = service.findUser(id);
+
+        if(savedUser == null){
+
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        System.out.println("\n===== SALUD Y RECOMENDACIONES =====");
 
         double imc = service.calculateIMC(id);
 
         System.out.printf("IMC: %.2f\n", imc);
 
         System.out.println(service.bmiRecommendation(id));
-        if(savedUser.getMainGoal().isEmpty()){
-            System.out.println("\nNo seleccionaste objetivos.");
-        } else {
-            System.out.println(service.generateRoutine(id));
-        }
 
         double calories = service.calculateCalories(id);
 
         System.out.printf("Calorías diarias estimadas: %.2f kcal\n", calories);
+
         System.out.println(service.caloriesRecommendation(id));
 
+        if(savedUser.getMainGoal().isEmpty()){
+
+            System.out.println("\nNo seleccionaste objetivos.");
+
+        } else {
+
+            System.out.println("\n===== RUTINAS =====");
+
+            System.out.println(service.generateRoutine(id));
+
+        }
+
     }
+
+    static void goalsMenu(Scanner sc, UserService service, int id){
+
+        int op;
+
+        do {
+
+            System.out.println("\n===== MENÚ DE OBJETIVOS =====");
+            System.out.println("1. Configurar objetivos");
+            System.out.println("2. Ver rutinas");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+
+            try {
+
+                op = sc.nextInt();
+                sc.nextLine();
+
+            } catch (Exception e){
+
+                System.out.println("Debe ingresar un número.");
+                sc.nextLine();
+                op = -1;
+            }
+
+            switch (op){
+
+                case 1:
+                    menuGoal(sc, service, id);
+                    break;
+
+                case 2:
+                    System.out.println(service.generateRoutine(id));
+                    break;
+
+                case 0:
+                    System.out.println("Saliendo del menú de objetivos...");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+            }
+
+        }while(op != 0);
+
+    }
+
     static void menuGoal(Scanner sc,UserService service,int id){
         // OBJETIVO PRINCIPAL
         System.out.println("\nSelecciona tu objetivo principal:");
@@ -142,7 +412,9 @@ public class Main {
                 System.out.println("Opción inválida");
         }
 
-        service.assignMainGoal(id, mainGoal);
+        if(!mainGoal.isEmpty()) {
+            service.assignMainGoal(id, mainGoal);
+        }
 
         // OBJETIVOS SECUNDARIOS
         int choice;
@@ -189,6 +461,7 @@ public class Main {
 
         } while (choice != 0);
     }
+
     static void menuUser(Scanner in,UserService service,int code){
         System.out.println("INFORMACION REGISTRADA DE USUARIO:");
         showDataUser(service,code);
@@ -196,7 +469,7 @@ public class Main {
         int op;
         do {
             System.out.println("Bienvenido a las configuraciones Usuario#"+code);
-            System.out.println("Ha seleccionado el menu de actuailizacion de Usuario");
+            System.out.println("Ha seleccionado el menu de actuailización de Usuario");
             System.out.println("1. cambiar peso");
             System.out.println("2. cambiar objetivos");
             System.out.println("0. Terminar");
@@ -232,10 +505,10 @@ public class Main {
                     if(weight > 0) {
                         service.updateWeight(weight, code);
                     }
-                    
+
                     break;
                 case 2:
-                    menuGoal(in,service,code);
+                    goalsMenu(in, service, code);
                     break;
                 case 0:
                     System.out.println("Configuraciones terminadas.");
@@ -287,8 +560,11 @@ public class Main {
 
             if(name.trim().isEmpty()){
                 System.out.println("Nombre inválido. Intente nuevamente.");
+            } else if(!name.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                System.out.println("El nombre solo debe contener letras.");
             }
-        }while(name.trim().isEmpty());
+        }while(name.trim().isEmpty() ||
+                !name.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"));
 
         return name;
     }
