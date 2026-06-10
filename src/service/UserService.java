@@ -5,10 +5,10 @@ import repositories.UserRepository;
 
 import java.util.ArrayList;
 
-public class UserService {
+public class UserService implements IUserService{
 
     private UserRepository repository = new UserRepository();
-
+    @Override
     public boolean registerUser(User user){
 
         if(user.getAge() <= 0 || user.getAge() > 120){
@@ -39,7 +39,7 @@ public class UserService {
         repository.create(user);
         return true;
     }
-
+    @Override
     public double calculateIMC(int id){
 
         User user = repository.findByCode(id);
@@ -52,7 +52,7 @@ public class UserService {
         return 0;
 
     }
-
+    @Override
     public String bmiRecommendation(int id){
 
         double bmi = calculateIMC(id);
@@ -80,6 +80,7 @@ public class UserService {
     }
 
     //Función para calcular calorías diarias
+    @Override
     public double calculateCalories(int id){
 
         User user = repository.findByCode(id);
@@ -104,7 +105,7 @@ public class UserService {
 
         return tmb * 1.55;
     }
-
+    @Override
     public String caloriesRecommendation(int id){
 
         User user = repository.findByCode(id);
@@ -136,6 +137,7 @@ public class UserService {
     }
 
     //Función que genera las rutinas
+    @Override
     public String generateRoutine(int id){
 
         User user = repository.findByCode(id);
@@ -185,24 +187,25 @@ public class UserService {
 
         return routineText;
     }
-
+    @Override
     public ArrayList<User> getAllUser(){
 
         return repository.getAll();
 
     }
-
+    @Override
     public User findUser(int id){
 
         return repository.findByCode(id);
 
     }
-
+    @Override
     public boolean deleteUser(int id){
 
         return repository.deleteByCode(id);
 
     }
+    @Override
     public void updateWeight(double weight,int id){
         if(weight <= 0){
             System.out.println("Peso inválido");
@@ -216,6 +219,7 @@ public class UserService {
             }
         }
     }
+    @Override
     public void assignMainGoal(int userId, String goal){
         User user = repository.findByCode(userId);
 
@@ -223,7 +227,7 @@ public class UserService {
             user.setMainGoal(goal);
         }
     }
-
+    @Override
     public void addSecondaryGoal(int userId, SecondaryGoals goal){
 
         User user = repository.findByCode(userId);
