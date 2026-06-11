@@ -205,6 +205,7 @@ public class UserService implements IUserService{
         return repository.deleteByCode(id);
 
     }
+
     @Override
     public void updateWeight(double weight,int id){
         if(weight <= 0){
@@ -314,5 +315,46 @@ public class UserService implements IUserService{
             user.getSecondaryGoals().add(goal);
             System.out.println("Objetivo agregado correctamente.");
         }
+    }
+
+    public void addHabit(int userId, Habit habit){
+
+        User user = repository.findByCode(userId);
+
+        if(user != null){
+
+            user.getHabits().add(habit);
+            System.out.println("Hábito agregado correctamente.");
+
+        }else{
+
+            System.out.println("Usuario no encontrado.");
+        }
+    }
+
+    public String showHabits(int userId){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+
+            return "Usuario no encontrado.";
+        }
+
+        if(user.getHabits().isEmpty()){
+
+            return "No hay hábitos registrados.";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n===== HÁBITOS REGISTRADOS =====\n");
+
+        for(Habit h : user.getHabits()){
+
+            sb.append(h).append("\n");
+        }
+
+        return sb.toString();
     }
 }

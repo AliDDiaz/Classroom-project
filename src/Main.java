@@ -1,4 +1,5 @@
 import entities.*;
+import java.time.LocalDate;
 import service.UserService;
 
 import java.util.ArrayList;
@@ -87,8 +88,9 @@ public class Main {
 
         ArrayList<Double> history = new ArrayList<>();
         history.add(weight);
+        ArrayList<Habit> habits = new ArrayList<>();
 
-        User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>(), history);
+        User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>(), history, habits);
 
         boolean created = service.registerUser(user);
 
@@ -474,6 +476,8 @@ public class Main {
             System.out.println("2. cambiar objetivos");
             System.out.println("3. ver historial de peso");
             System.out.println("4. ver progreso");
+            System.out.println("5. registrar hábito");
+            System.out.println("6. ver hábitos");
             System.out.println("0. Terminar");
             System.out.print("Opcion: ");
             try {
@@ -522,6 +526,16 @@ public class Main {
                     System.out.println(service.showProgress(code));
                     break;
 
+                case 5:
+
+                    registerHabit(in, service, code);
+                    break;
+
+                case 6:
+
+                    System.out.println(service.showHabits(code));
+                    break;
+
                 case 0:
                     System.out.println("Configuraciones terminadas.");
                     break;
@@ -532,6 +546,49 @@ public class Main {
             }
         }while(op!= 0);
 
+    }
+
+    static void registerHabit(Scanner sc, UserService service, int userId){
+
+        int habitId;
+
+        System.out.print("ID del hábito: ");
+
+        try{
+
+            habitId = sc.nextInt();
+            sc.nextLine();
+
+        }catch(Exception e){
+
+            System.out.println("Debe ingresar un número válido.");
+            sc.nextLine();
+            return;
+        }
+
+        System.out.print("Nombre del hábito: ");
+        String name = sc.nextLine();
+
+        System.out.print("Categoría: ");
+        String category = sc.nextLine();
+
+        System.out.print("¿Completado? (s/n): ");
+        String answer = sc.nextLine();
+
+        boolean completed = answer.equalsIgnoreCase("s");
+
+        Habit habit = new Habit(
+                habitId,
+                userId,
+                name,
+                category,
+                completed,
+                LocalDate.now()
+        );
+
+        service.addHabit(userId, habit);
+
+        System.out.println("Hábito registrado correctamente.");
     }
 
     //Métodos

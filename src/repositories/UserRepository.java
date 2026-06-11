@@ -45,6 +45,7 @@ public class UserRepository {
         return list.removeIf(s -> s.getId() == code);
 
     }
+
     public boolean weightUpdater(double newWeight,int code){
         for(User u:list){
             if(u.getId()==code){

@@ -17,4 +17,8 @@ public interface IUserService {
     public void updateWeight(double weight,int id);
     public void assignMainGoal(int userId, String goal);
     public void addSecondaryGoal(int userId, SecondaryGoals goal);
+    public void addHabit(int userId, Habit habit);
+    public String showHabits(int userId);
+    public String showWeightHistory(int id);
+    public String showProgress(int id);
 }

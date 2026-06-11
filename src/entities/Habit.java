@@ -41,13 +41,12 @@ public class Habit {
 
     @Override
     public String toString() {
-        return "Habit{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", completed=" + completed +
-                ", date=" + date +
-                '}';
+
+        return "ID: " + id +
+                "\nNombre: " + name +
+                "\nCategoría: " + category +
+                "\nCompletado: " + (completed ? "Sí" : "No") +
+                "\nFecha: " + date +
+                "\n";
     }
 }
