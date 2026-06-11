@@ -90,7 +90,7 @@ public class Main {
         history.add(weight);
         ArrayList<Habit> habits = new ArrayList<>();
 
-        User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>(), history, habits);
+        User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>(), history, habits, 0);
 
         boolean created = service.registerUser(user);
 
@@ -478,7 +478,12 @@ public class Main {
             System.out.println("4. ver progreso");
             System.out.println("5. registrar hábito");
             System.out.println("6. ver hábitos");
-            System.out.println("0. Terminar");
+            System.out.println("7. estadística de hábitos");
+            System.out.println("8. completar hábito");
+            System.out.println("9. eliminar hábito");
+            System.out.println("10. configurar meta de peso");
+            System.out.println("11. ver progreso de meta");
+            System.out.println("0. terminar");
             System.out.print("Opcion: ");
             try {
 
@@ -536,6 +541,30 @@ public class Main {
                     System.out.println(service.showHabits(code));
                     break;
 
+                case 7:
+                    System.out.println(service.habitsStatistics(code));
+                    break;
+
+                case 8:
+
+                    completeHabitMenu(in, service, code);
+                    break;
+
+                case 9:
+
+                    deleteHabitMenu(in, service, code);
+                    break;
+
+                case 10:
+
+                    configureTargetWeight(in, service, code);
+                    break;
+
+                case 11:
+
+                    System.out.println(service.showGoalProgress(code));
+                    break;
+
                 case 0:
                     System.out.println("Configuraciones terminadas.");
                     break;
@@ -550,32 +579,56 @@ public class Main {
 
     static void registerHabit(Scanner sc, UserService service, int userId){
 
-        int habitId;
-
-        System.out.print("ID del hábito: ");
-
-        try{
-
-            habitId = sc.nextInt();
-            sc.nextLine();
-
-        }catch(Exception e){
-
-            System.out.println("Debe ingresar un número válido.");
-            sc.nextLine();
-            return;
-        }
+        int habitId = service.generateHabitId(userId);
 
         System.out.print("Nombre del hábito: ");
         String name = sc.nextLine();
 
-        System.out.print("Categoría: ");
-        String category = sc.nextLine();
+        String category = "";
 
-        System.out.print("¿Completado? (s/n): ");
-        String answer = sc.nextLine();
+        int categoryOption;
 
-        boolean completed = answer.equalsIgnoreCase("s");
+        do {
+
+            System.out.println("\nSeleccione una categoría:");
+            System.out.println("1. Ejercicio");
+            System.out.println("2. Alimentación");
+            System.out.println("3. Descanso");
+            System.out.print("Opción: ");
+
+            try {
+
+                categoryOption = sc.nextInt();
+                sc.nextLine();
+
+            } catch (Exception e){
+
+                System.out.println("Debe ingresar un número.");
+                sc.nextLine();
+                categoryOption = -1;
+            }
+
+            switch(categoryOption){
+
+                case 1:
+                    category = "Ejercicio";
+                    break;
+
+                case 2:
+                    category = "Alimentación";
+                    break;
+
+                case 3:
+                    category = "Descanso";
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+            }
+
+        }while(category.isEmpty());
+
+        boolean completed = false;
 
         Habit habit = new Habit(
                 habitId,
@@ -589,6 +642,94 @@ public class Main {
         service.addHabit(userId, habit);
 
         System.out.println("Hábito registrado correctamente.");
+    }
+
+    static void completeHabitMenu(Scanner sc, UserService service, int userId){
+
+        System.out.println(
+                service.showHabits(userId));
+
+        int habitId;
+
+        System.out.print(
+                "Ingrese el ID del hábito completado: ");
+
+        try{
+
+            habitId = sc.nextInt();
+            sc.nextLine();
+
+        }catch(Exception e){
+
+            System.out.println(
+                    "Debe ingresar un número válido.");
+
+            sc.nextLine();
+            return;
+        }
+
+        service.completeHabit(userId, habitId);
+    }
+
+    static void deleteHabitMenu(Scanner sc, UserService service, int userId){
+
+        System.out.println(
+                service.showHabits(userId));
+
+        int habitId;
+
+        System.out.print(
+                "Ingrese el ID del hábito a eliminar: ");
+
+        try{
+
+            habitId = sc.nextInt();
+            sc.nextLine();
+
+        }catch(Exception e){
+
+            System.out.println(
+                    "Debe ingresar un número válido.");
+
+            sc.nextLine();
+            return;
+        }
+
+        service.deleteHabit(userId, habitId);
+    }
+
+    static void configureTargetWeight(Scanner sc, UserService service, int userId){
+
+        double targetWeight;
+
+        System.out.print(
+                "Ingrese su peso meta (kg): ");
+
+        try{
+
+            targetWeight = sc.nextDouble();
+            sc.nextLine();
+
+        }catch(Exception e){
+
+            System.out.println(
+                    "Debe ingresar un número válido.");
+
+            sc.nextLine();
+            return;
+        }
+
+        if(targetWeight <= 0){
+
+            System.out.println(
+                    "La meta debe ser mayor que cero.");
+
+            return;
+        }
+
+        service.setTargetWeight(
+                userId,
+                targetWeight);
     }
 
     //Métodos

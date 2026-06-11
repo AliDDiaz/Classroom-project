@@ -199,6 +199,7 @@ public class UserService implements IUserService{
         return repository.findByCode(id);
 
     }
+
     @Override
     public boolean deleteUser(int id){
 
@@ -288,6 +289,64 @@ public class UserService implements IUserService{
         return progress;
     }
 
+    public void setTargetWeight(int userId, double targetWeight){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        user.setTargetWeight(targetWeight);
+
+        System.out.println(
+                "Meta de peso configurada correctamente.");
+    }
+
+    public String showGoalProgress(int userId){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+
+            return "Usuario no encontrado.";
+        }
+
+        if(user.getTargetWeight() <= 0){
+
+            return "No has configurado una meta de peso.";
+        }
+
+        double current = user.getWeight();
+
+        double target = user.getTargetWeight();
+
+        double difference = current - target;
+
+        String text = "===== META DE PESO =====\n";
+
+        text += "Peso actual: "
+                + current + " kg\n";
+
+        text += "Meta: "
+                + target + " kg\n";
+
+        if(difference > 0){
+
+            text += "Te faltan "
+                    + String.format("%.2f", difference)
+                    + " kg para alcanzar tu meta.";
+
+        }else{
+
+            text += "¡Meta alcanzada!";
+        }
+
+        return text;
+    }
+
     @Override
     public void assignMainGoal(int userId, String goal){
         User user = repository.findByCode(userId);
@@ -332,6 +391,41 @@ public class UserService implements IUserService{
         }
     }
 
+    public int generateHabitId(int userId){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+            return 1;
+        }
+
+        return user.getHabits().size() + 1;
+    }
+
+    public void completeHabit(int userId, int habitId){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        for(Habit h : user.getHabits()){
+
+            if(h.getId() == habitId){
+
+                h.setCompleted(true);
+
+                System.out.println("Hábito completado correctamente.");
+                return;
+            }
+        }
+
+        System.out.println("No existe un hábito con ese ID.");
+    }
+
     public String showHabits(int userId){
 
         User user = repository.findByCode(userId);
@@ -356,5 +450,66 @@ public class UserService implements IUserService{
         }
 
         return sb.toString();
+    }
+
+    public void deleteHabit(int userId, int habitId){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        boolean removed = user.getHabits()
+                .removeIf(h -> h.getId() == habitId);
+
+        if(removed){
+
+            System.out.println("Hábito eliminado correctamente.");
+
+        }else{
+
+            System.out.println("No existe un hábito con ese ID.");
+        }
+    }
+
+    public String habitsStatistics(int userId){
+
+        User user = repository.findByCode(userId);
+
+        if(user == null){
+            return "Usuario no encontrado.";
+        }
+
+        ArrayList<Habit> habits = user.getHabits();
+
+        if(habits.isEmpty()){
+            return "No hay hábitos registrados.";
+        }
+
+        int completed = 0;
+
+        for(Habit h : habits){
+
+            if(h.isCompleted()){
+                completed++;
+            }
+        }
+
+        int total = habits.size();
+
+        int pending = total - completed;
+
+        double percentage = (completed * 100.0) / total;
+
+        String stats = "===== ESTADÍSTICAS DE HÁBITOS =====\n";
+        stats += "Hábitos registrados: " + total + "\n";
+        stats += "Completados: " + completed + "\n";
+        stats += "Pendientes: " + pending + "\n";
+        stats += String.format("Porcentaje de cumplimiento: %.2f%%", percentage);
+
+        return stats;
     }
 }

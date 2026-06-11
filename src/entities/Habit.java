@@ -45,7 +45,8 @@ public class Habit {
         return "ID: " + id +
                 "\nNombre: " + name +
                 "\nCategoría: " + category +
-                "\nCompletado: " + (completed ? "Sí" : "No") +
+                "\nEstado: " +
+                (completed ? "Completado" : "Pendiente") +
                 "\nFecha: " + date +
                 "\n";
     }
