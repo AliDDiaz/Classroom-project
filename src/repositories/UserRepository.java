@@ -49,6 +49,7 @@ public class UserRepository {
         for(User u:list){
             if(u.getId()==code){
                 u.setWeight(newWeight);
+                u.getWeightHistory().add(newWeight);
                 return true;
             }
         }

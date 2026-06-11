@@ -219,6 +219,74 @@ public class UserService implements IUserService{
             }
         }
     }
+
+    public String showWeightHistory(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user == null){
+            return "Usuario no encontrado.";
+        }
+
+        String history = "===== HISTORIAL DE PESO =====\n";
+
+        int count = 1;
+
+        for(Double weight : user.getWeightHistory()){
+
+            history += "Registro " + count + ": "
+                    + weight + " kg\n";
+
+            count++;
+        }
+
+        return history;
+    }
+
+    public String showProgress(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user == null){
+            return "Usuario no encontrado.";
+        }
+
+        ArrayList<Double> history = user.getWeightHistory();
+
+        if(history.isEmpty()){
+            return "No hay datos de progreso.";
+        }
+
+        double initialWeight = history.get(0);
+        double currentWeight = user.getWeight();
+
+        double difference = currentWeight - initialWeight;
+
+        String progress = "===== PROGRESO =====\n";
+        progress += "Peso inicial: " + initialWeight + " kg\n";
+        progress += "Peso actual: " + currentWeight + " kg\n";
+
+        if(difference < 0){
+
+            progress += "Has perdido "
+                    + Math.abs(difference)
+                    + " kg";
+
+        }else if(difference > 0){
+
+            progress += "Has ganado "
+                    + difference
+                    + " kg";
+
+        }else{
+
+            progress += "No hay cambios en el peso.";
+
+        }
+
+        return progress;
+    }
+
     @Override
     public void assignMainGoal(int userId, String goal){
         User user = repository.findByCode(userId);

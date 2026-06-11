@@ -468,10 +468,12 @@ public class Main {
         double weight;
         int op;
         do {
-            System.out.println("Bienvenido a las configuraciones Usuario#"+code);
+            System.out.println("Bienvenido a las configuraciones Usuario #"+code);
             System.out.println("Ha seleccionado el menu de actuailización de Usuario");
             System.out.println("1. cambiar peso");
             System.out.println("2. cambiar objetivos");
+            System.out.println("3. ver historial de peso");
+            System.out.println("4. ver progreso");
             System.out.println("0. Terminar");
             System.out.print("Opcion: ");
             try {
@@ -507,12 +509,23 @@ public class Main {
                     }
 
                     break;
+
                 case 2:
                     goalsMenu(in, service, code);
                     break;
+
+                case 3:
+                    System.out.println(service.showWeightHistory(code));
+                    break;
+
+                case 4:
+                    System.out.println(service.showProgress(code));
+                    break;
+
                 case 0:
                     System.out.println("Configuraciones terminadas.");
                     break;
+
                 default:
                     System.out.println("Opción inválida");
 
