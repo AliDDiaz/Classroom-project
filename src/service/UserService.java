@@ -319,32 +319,36 @@ public class UserService implements IUserService{
             return "No has configurado una meta de peso.";
         }
 
-        double current = user.getWeight();
+        double currentWeight = user.getWeight();
 
-        double target = user.getTargetWeight();
+        double targetWeight = user.getTargetWeight();
 
-        double difference = current - target;
+        String progress = "===== META DE PESO =====\n";
 
-        String text = "===== META DE PESO =====\n";
+        progress += "Peso actual: " + currentWeight + " kg\n";
+        progress += "Meta: " + targetWeight + " kg\n";
 
-        text += "Peso actual: "
-                + current + " kg\n";
+        if(currentWeight == targetWeight){
 
-        text += "Meta: "
-                + target + " kg\n";
+            progress += "¡Felicitaciones! Alcanzaste tu meta de peso.";
 
-        if(difference > 0){
+        }
+        else if(currentWeight > targetWeight){
 
-            text += "Te faltan "
-                    + String.format("%.2f", difference)
-                    + " kg para alcanzar tu meta.";
+            progress += String.format(
+                    "Te faltan %.2f kg para alcanzar tu meta.",
+                    currentWeight - targetWeight);
 
-        }else{
+        }
+        else{
 
-            text += "¡Meta alcanzada!";
+            progress += String.format(
+                    "Has superado tu meta por %.2f kg. ¡Excelente trabajo!",
+                    targetWeight - currentWeight);
+
         }
 
-        return text;
+        return progress;
     }
 
     @Override
