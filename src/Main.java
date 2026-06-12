@@ -89,18 +89,19 @@ public class Main {
         ArrayList<Double> history = new ArrayList<>();
         history.add(weight);
         ArrayList<Habit> habits = new ArrayList<>();
-
+        boolean created;
         User user = new User(id, name, age, weight, height, gender, "", new ArrayList<>(), history, habits, 0);
-
-        boolean created = service.registerUser(user);
+        try{
+           created = service.registerUser(user);
+        }catch (IllegalArgumentException e){
+            System.out.println("Formato invalido,"+e.getMessage());
+           created=false;
+        }
 
         if(created){
-
             System.out.println("Usuario registrado correctamente.");
-        } else {
-
-            System.out.println("Error al registrar usuario.");
-
+        }else {
+            System.out.println("No se pudo crear el usuario");
         }
     }
 

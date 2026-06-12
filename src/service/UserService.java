@@ -12,28 +12,28 @@ public class UserService implements IUserService{
     public boolean registerUser(User user){
 
         if(user.getAge() <= 0 || user.getAge() > 120){
-            System.out.println("Edad inválida. Intente nuevamente.");
-            return false;
+            throw new IllegalArgumentException("Edad inválida. Intente nuevamente.");
+
         }
 
         if(user.getWeight() <= 0){
-            System.out.println("Peso inválido. Intente nuevamente.");
-            return false;
+            throw new IllegalArgumentException("Peso inválido. Intente nuevamente.");
+
         }
 
         if(user.getHeight() <= 0){
-            System.out.println("Altura inválida. Intente nuevamente.");
-            return false;
+            throw new IllegalArgumentException("Altura inválida. Intente nuevamente.");
+
         }
 
         if(user.getName() == null || user.getName().isEmpty()){
-            System.out.println("Nombre inválido. Intente nuevamente.");
-            return false;
+            throw new IllegalArgumentException("Nombre inválido. Intente nuevamente.");
+
         }
 
         if(repository.findByCode(user.getId()) != null){
-            System.out.println("El usuario ya existe.");
-            return false;
+            throw new IllegalArgumentException("El usuario ya existe.");
+
         }
 
         repository.create(user);
@@ -210,7 +210,7 @@ public class UserService implements IUserService{
     @Override
     public void updateWeight(double weight,int id){
         if(weight <= 0){
-            System.out.println("Peso inválido");
+            throw new IllegalArgumentException("Peso inválido");
         }
         else {
             if(repository.weightUpdater(weight,id)){
@@ -236,8 +236,7 @@ public class UserService implements IUserService{
 
         for(Double weight : user.getWeightHistory()){
 
-            history += "Registro " + count + ": "
-                    + weight + " kg\n";
+            history += "Registro " + count + ": " + weight + " kg\n";
 
             count++;
         }
@@ -462,8 +461,7 @@ public class UserService implements IUserService{
             return;
         }
 
-        boolean removed = user.getHabits()
-                .removeIf(h -> h.getId() == habitId);
+        boolean removed = user.getHabits().removeIf(h -> h.getId() == habitId);
 
         if(removed){
 
