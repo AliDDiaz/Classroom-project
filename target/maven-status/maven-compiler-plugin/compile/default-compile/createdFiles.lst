@@ -11,6 +11,7 @@ ChatBotProject\Main.class
 ChatBotProject\entities\WeightLossRoutine.class
 ChatBotProject\entities\SleepImprovementGoal.class
 ChatBotProject\controllers\MainController.class
+ChatBotProject\controllers\HabitsController.class
 ChatBotProject\repositories\UserRepository.class
 ChatBotProject\service\UserService.class
 ChatBotProject\entities\Habit.class

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ChatBotProject.controllers.HabitsController"
+      spacing="12"
+      prefWidth="560"
+      prefHeight="520">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Gestion de Habitos"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Label fx:id="labelUser"
+           text="Usuario"/>
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Nombre:"
+               GridPane.rowIndex="0"
+               GridPane.columnIndex="0"/>
+        <TextField fx:id="fieldHabitName"
+                   promptText="Ej: Caminar 30 minutos"
+                   GridPane.rowIndex="0"
+                   GridPane.columnIndex="1"/>
+
+        <Label text="Categoria:"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="0"/>
+        <ComboBox fx:id="comboCategory"
+                  prefWidth="200"
+                  GridPane.rowIndex="1"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="Fecha:"
+               GridPane.rowIndex="2"
+               GridPane.columnIndex="0"/>
+        <DatePicker fx:id="dateHabit"
+                    prefWidth="200"
+                    GridPane.rowIndex="2"
+                    GridPane.columnIndex="1"/>
+
+        <Label text="Estado:"
+               GridPane.rowIndex="3"
+               GridPane.columnIndex="0"/>
+        <CheckBox fx:id="checkCompleted"
+                  text="Completado"
+                  GridPane.rowIndex="3"
+                  GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Button text="Registrar habito"
+            onAction="#registerHabit"
+            prefWidth="180"
+            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="fieldHabitId"
+                   promptText="ID del habito"
+                   prefWidth="140"/>
+
+        <Button text="Completar"
+                onAction="#completeHabit"
+                prefWidth="110"
+                style="-fx-background-color: #2980b9; -fx-text-fill: white;"/>
+
+        <Button text="Eliminar"
+                onAction="#deleteHabit"
+                prefWidth="110"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button text="Ver habitos"
+                onAction="#showHabits"
+                prefWidth="130"/>
+
+        <Button text="Ver estadisticas"
+                onAction="#showStatistics"
+                prefWidth="130"/>
+    </HBox>
+
+    <TextArea fx:id="resultArea"
+              prefHeight="230"
+              wrapText="true"/>
+
+    <Label fx:id="labelStatus"
+           text="Listo."
+           style="-fx-text-fill: #555555;"/>
+
+</VBox>

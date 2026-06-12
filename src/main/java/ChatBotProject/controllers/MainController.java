@@ -281,7 +281,43 @@ public class MainController {
     }
     @FXML
     private void openHabitsWindow(){
+        try{
 
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "/ChatBotProject/views/HabitsView.fxml"
+                    )
+            );
+
+            Parent root = loader.load();
+
+            HabitsController controller =
+                    loader.getController();
+
+            controller.setUserId(
+                    Integer.parseInt(
+                            fieldId.getText().trim()
+                    )
+            );
+
+            Stage stage = new Stage();
+
+            stage.setTitle("Habitos");
+
+            stage.setScene(
+                    new Scene(root)
+            );
+
+            stage.show();
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+            setStatus(
+                    "No fue posible abrir la ventana de habitos."
+            );
+        }
     }
     @FXML
     private void openGoalsWindow(){
