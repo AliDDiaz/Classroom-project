@@ -1,4 +1,4 @@
-package entities;
+package ChatBotProject.entities;
 
 import java.time.LocalDate;
 

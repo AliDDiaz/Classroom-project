@@ -1,77 +1,33 @@
-import entities.*;
-import java.time.LocalDate;
-import service.UserService;
+package ChatBotProject;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
+import javafx.stage.Stage;
+import ChatBotProject.entities.*;
+import ChatBotProject.service.UserService;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
-    // Desarrollado por: Omar Agamez - primer commit
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        UserService service = new UserService();
-
-        System.out.println("🤖 Hola, soy tu entrenador personal");
-        System.out.println("Permiteme conocerte mejor querid@ Usuari@");
-
-        int op;
-
-        do {
-
-            System.out.println("\n===== MENÚ PRINCIPAL =====");
-            System.out.println("1. Registrar usuario.");
-            System.out.println("2. Mostrar usuarios.");
-            System.out.println("3. Buscar usuario.");
-            System.out.println("4. Eliminar usuario.");
-            System.out.println("5. Ingresar a usuario.");
-            System.out.println("0. Salir.");
-            System.out.print("Opción: ");
-
-            try {
-                op = sc.nextInt();
-                sc.nextLine();
-            } catch (Exception e){
-
-                System.out.println("Debe ingresar un número.");
-                sc.nextLine();
-                op = -1;
-            }
-
-            switch(op){
-
-                case 1:
-                    registerUserMenu(sc, service);
-                    break;
-
-                case 2:
-                    showAllUsers(service);
-                    break;
-
-                case 3:
-                    searchUser(sc, service);
-                    break;
-
-                case 4:
-                    deleteUser(sc, service);
-                    break;
-
-                case 5:
-                    accessUser(sc, service);
-                    break;
-
-                case 0:
-                    System.out.println("Programa finalizado.");
-                    break;
-
-                default:
-                    System.out.println("Opción inválida.");
-            }
-
-        }while(op != 0);
-
+public class Main extends Application {
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/ChatBotProject/views/MainView.fxml")
+        );
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 800, 600);
+        stage.setTitle("Entrenador Personal - ChatBot");
+        stage.setScene(scene);
+        stage.show();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
     static void registerUserMenu(Scanner sc, UserService service){
 
         int id = readValidId(sc, service);

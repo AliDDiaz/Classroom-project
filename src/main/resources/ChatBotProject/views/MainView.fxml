@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ChatBotProject.controllers.MainController"
+            prefWidth="800" prefHeight="600">
+
+    <!-- ===== ENCABEZADO ===== -->
+    <top>
+        <VBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="🤖 Entrenador Personal"
+                   style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+            <Label text="Gestión de usuarios"
+                   style="-fx-text-fill: #bdc3c7; -fx-font-size: 13px;"/>
+        </VBox>
+    </top>
+
+    <!-- ===== CENTRO: tabla de usuarios ===== -->
+    <center>
+        <VBox spacing="10" style="-fx-padding: 15;">
+
+            <Label text="Lista de usuarios registrados"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <TableView fx:id="userTable" prefHeight="380">
+                <columns>
+                    <TableColumn fx:id="colId"     text="ID"     prefWidth="60"/>
+                    <TableColumn fx:id="colName"   text="Nombre" prefWidth="160"/>
+                    <TableColumn fx:id="colAge"    text="Edad"   prefWidth="80"/>
+                    <TableColumn fx:id="colWeight" text="Peso"   prefWidth="80"/>
+                    <TableColumn fx:id="colHeight" text="Altura" prefWidth="80"/>
+                    <TableColumn fx:id="colGender" text="Género" prefWidth="100"/>
+                    <TableColumn fx:id="colGoal"   text="Objetivo principal" prefWidth="180"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+    <!-- ===== PANEL DERECHO: formulario ===== -->
+    <right>
+        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #ecf0f1;"
+              prefWidth="220">
+
+            <Label text="Datos del usuario"
+                   style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+
+            <Label text="ID:"/>
+            <TextField fx:id="fieldId" promptText="Ej: 1"/>
+
+            <Label text="Nombre:"/>
+            <TextField fx:id="fieldName" promptText="Ej: Juan Pérez"/>
+
+            <Label text="Edad:"/>
+            <TextField fx:id="fieldAge" promptText="Ej: 25"/>
+
+            <Label text="Peso (kg):"/>
+            <TextField fx:id="fieldWeight" promptText="Ej: 70.5"/>
+
+            <Label text="Altura (m):"/>
+            <TextField fx:id="fieldHeight" promptText="Ej: 1.75"/>
+
+            <Label text="Género:"/>
+            <TextField fx:id="fieldGender" promptText="Masculino / Femenino"/>
+
+            <!-- ===== BOTONES CRUD ===== -->
+            <HBox spacing="8" style="-fx-padding-top: 10;">
+                <Button fx:id="btnCreate" text="Registrar"
+                        onAction="#handleCreate"
+                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
+                        prefWidth="95"/>
+                <Button fx:id="btnDelete" text="Eliminar"
+                        onAction="#handleDelete"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
+                        prefWidth="95"/>
+            </HBox>
+            <Button fx:id="btnUpdate" text="Actualizar peso"
+                    onAction="#handleUpdate"
+                    style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"
+                    prefWidth="200"/>
+            <Button fx:id="btnSearch" text="Buscar por ID"
+                    onAction="#handleSearch"
+                    style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold;"
+                    prefWidth="200"/>
+            <Button fx:id="btnClear" text="Limpiar campos"
+                    onAction="#handleClear"
+                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"
+                    prefWidth="200"/>
+
+        </VBox>
+    </right>
+
+    <!-- ===== PIE ===== -->
+    <bottom>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 8;">
+            <Label fx:id="labelStatus" text="Listo."
+                   style="-fx-text-fill: #bdc3c7; -fx-font-size: 12px;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

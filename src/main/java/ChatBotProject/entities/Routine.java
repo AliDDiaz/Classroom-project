@@ -1,4 +1,4 @@
-package entities;
+package ChatBotProject.entities;
 
 public abstract class Routine {
 

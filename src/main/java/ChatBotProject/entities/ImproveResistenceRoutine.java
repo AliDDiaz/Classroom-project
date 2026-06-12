@@ -1,4 +1,4 @@
-package entities;
+package ChatBotProject.entities;
 
 public class ImproveResistenceRoutine extends Routine{
 

@@ -1,6 +1,6 @@
-package repositories;
+package ChatBotProject.repositories;
 
-import entities.User;
+import ChatBotProject.entities.User;
 
 import java.util.ArrayList;
 

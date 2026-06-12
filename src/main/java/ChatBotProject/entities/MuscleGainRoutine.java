@@ -1,4 +1,4 @@
-package entities;
+package ChatBotProject.entities;
 
 public class MuscleGainRoutine extends Routine {
 
