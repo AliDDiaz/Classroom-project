@@ -229,6 +229,38 @@ public class Main extends Application {
 
     }
 
+    static void loginMenu(Scanner sc, UserService service){
+
+        int id;
+
+        System.out.print("Ingrese su ID: ");
+
+        try{
+
+            id = sc.nextInt();
+            sc.nextLine();
+
+        }catch(Exception e){
+
+            System.out.println("Debe ingresar un número válido.");
+            sc.nextLine();
+            return;
+        }
+
+        if(service.login(id)){
+
+            User user = service.getLoggedUser();
+
+            System.out.println(
+                    "Sesión iniciada correctamente. Bienvenido "
+                            + user.getName());
+
+        }else{
+
+            System.out.println("Usuario no encontrado.");
+        }
+    }
+
     static void showDataUser(UserService service, int id){
 
         User savedUser = service.findUser(id);

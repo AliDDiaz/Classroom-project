@@ -7,7 +7,33 @@ import java.util.ArrayList;
 
 public class UserService implements IUserService{
 
-    private UserRepository repository = new UserRepository();
+    private final UserRepository repository = new UserRepository();
+    private User loggedUser;
+
+    public boolean login(int id){
+
+        User user = repository.findByCode(id);
+
+        if(user == null){
+
+            return false;
+        }
+
+        loggedUser = user;
+
+        return true;
+    }
+
+    public void logout(){
+
+        loggedUser = null;
+    }
+
+    public User getLoggedUser(){
+
+        return loggedUser;
+    }
+
     @Override
     public boolean registerUser(User user){
 

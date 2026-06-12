@@ -5,6 +5,10 @@ import ChatBotProject.entities.User;
 import ChatBotProject.service.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,6 +37,7 @@ public class MainController {
 
     // ── Botones y estado ──────────────────────────────────────────────────
     @FXML private Label labelStatus;
+    @FXML private TextArea resultArea;
 
     // ── Lógica ────────────────────────────────────────────────────────────
     private final UserService service = new UserService();
@@ -169,5 +174,117 @@ public class MainController {
 
     private void setStatus(String msg) {
         labelStatus.setText(msg);
+    }
+
+    private void showResult(String text){
+        resultArea.setText(text);
+    }
+
+    @FXML
+    private void handleHistory(){
+
+        try{
+
+            int id = Integer.parseInt(
+                    fieldId.getText().trim());
+
+            showResult(
+                    service.showWeightHistory(id));
+
+        }catch(Exception e){
+
+            setStatus("Ingrese un ID válido.");
+        }
+    }
+
+    @FXML
+    private void handleProgress(){
+
+        try{
+
+            int id = Integer.parseInt(
+                    fieldId.getText().trim());
+
+            showResult(
+                    service.showProgress(id));
+
+        }catch(Exception e){
+
+            setStatus("Ingrese un ID válido.");
+        }
+    }
+
+    @FXML
+    private void handleIMC(){
+
+        try{
+
+            int id = Integer.parseInt(
+                    fieldId.getText().trim());
+
+            String result =
+                    "===== IMC =====\n" +
+                            String.format(
+                                    "IMC: %.2f\n\n",
+                                    service.calculateIMC(id))
+                            +
+                            service.bmiRecommendation(id);
+
+            showResult(result);
+
+        }catch(Exception e){
+
+            setStatus("Ingrese un ID válido.");
+        }
+    }
+
+    @FXML
+    private void openHealthWindow(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "/ChatBotProject/views/HealthView.fxml"
+                    )
+            );
+
+            Parent root = loader.load();
+
+            HealthController controller =
+                    loader.getController();
+
+            controller.setUserId(
+                    Integer.parseInt(
+                            fieldId.getText()
+                    )
+            );
+
+            Stage stage = new Stage();
+
+            stage.setTitle("Información de Salud");
+
+            stage.setScene(
+                    new Scene(root)
+            );
+
+            stage.show();
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+            setStatus(
+                    "No fue posible abrir la ventana de salud."
+            );
+        }
+    }
+    @FXML
+    private void openHabitsWindow(){
+
+    }
+    @FXML
+    private void openGoalsWindow(){
+
     }
 }
