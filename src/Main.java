@@ -754,7 +754,7 @@ public class Main {
 
         } catch (Exception e){
 
-                System.out.println("Debe inggresar un número válido.");
+                System.out.println("Debe ingresar un número válido.");
                 sc.nextLine();
                 id = -1;
             }
