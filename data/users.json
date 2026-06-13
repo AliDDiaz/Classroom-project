@@ -69,30 +69,6 @@
       "weightHistory": [],
       "habits": [],
       "targetWeight": 0.0
-    },
-    {
-      "id": 2,
-      "name": "Mbappe",
-      "age": 27,
-      "weight": 82.0,
-      "height": 1.75,
-      "gender": "Masculino",
-      "mainGoal": "",
-      "secondaryGoals": [],
-      "weightHistory": [
-        82.0
-      ],
-      "habits": [
-        {
-          "id": 1,
-          "userId": 2,
-          "name": "Jogar futchibol",
-          "category": "Ejercicio",
-          "completed": true,
-          "date": "2026-06-13"
-        }
-      ],
-      "targetWeight": 56.0
     }
   ]
 }
