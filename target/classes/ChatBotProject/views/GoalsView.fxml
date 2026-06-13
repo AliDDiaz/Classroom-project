@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ChatBotProject.controllers.GoalsController"
+      spacing="12"
+      prefWidth="560"
+      prefHeight="560">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Objetivos"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Label fx:id="labelUser"
+           text="Usuario"/>
+
+    <!-- ===== OBJETIVO PRINCIPAL ===== -->
+    <Label text="Objetivo principal:"
+           style="-fx-font-weight: bold;"/>
+
+    <ComboBox fx:id="comboMainGoal"
+              prefWidth="280"
+              promptText="Selecciona tu objetivo principal"/>
+
+    <Button text="Asignar objetivo principal"
+            onAction="#assignMainGoal"
+            prefWidth="220"
+            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    <!-- ===== OBJETIVOS SECUNDARIOS ===== -->
+    <Label text="Objetivos secundarios:"
+           style="-fx-font-weight: bold;"/>
+
+    <CheckBox fx:id="checkStress"
+              text="Reducir estrés"/>
+
+    <CheckBox fx:id="checkSleep"
+              text="Mejorar sueño"/>
+
+    <CheckBox fx:id="checkEnergy"
+              text="Aumentar energía"/>
+
+    <CheckBox fx:id="checkHabits"
+              text="Desarrollar hábitos saludables"/>
+
+    <Button text="Agregar objetivos secundarios"
+            onAction="#addSecondaryGoals"
+            prefWidth="220"
+            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    <!-- ===== CONSULTAS ===== -->
+    <HBox spacing="10">
+        <Button text="Ver objetivos actuales"
+                onAction="#showCurrentGoals"
+                prefWidth="170"/>
+
+        <Button text="Ver rutina"
+                onAction="#showRoutine"
+                prefWidth="170"/>
+    </HBox>
+
+    <TextArea fx:id="resultArea"
+              prefHeight="220"
+              wrapText="true"
+              editable="false"/>
+
+    <Label fx:id="labelStatus"
+           text="Listo."
+           style="-fx-text-fill: #555555;"/>
+
+</VBox>

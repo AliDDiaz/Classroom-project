@@ -320,7 +320,46 @@ public class MainController {
         }
     }
     @FXML
-    private void openGoalsWindow(){
+    private void openGoalsWindow() {
+        try {
 
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "/ChatBotProject/views/GoalsView.fxml"
+                    )
+            );
+
+            Parent root = loader.load();
+
+            GoalsController controller =
+                    loader.getController();
+
+            controller.setUserId(
+                    Integer.parseInt(
+                            fieldId.getText().trim()
+                    )
+            );
+
+            Stage stage = new Stage();
+
+            stage.setTitle("Objetivos");
+
+            stage.setScene(
+                    new Scene(root)
+            );
+
+            stage.setOnHidden(e -> refreshTable());
+
+            stage.show();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            setStatus(
+                    "No fue posible abrir la ventana de objetivos."
+            );
+        }
     }
+
 }
