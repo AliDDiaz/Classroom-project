@@ -19,9 +19,10 @@ public class Main extends Application {
                 getClass().getResource("/ChatBotProject/views/MainView.fxml")
         );
         Parent root = loader.load();
-        Scene scene = new Scene(root, 800, 600);
-        stage.setTitle("Entrenador Personal - ChatBot");
+        Scene scene = new Scene(root, 1000, 700);
+        stage.setTitle("FitTracker App - Menú Principal");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

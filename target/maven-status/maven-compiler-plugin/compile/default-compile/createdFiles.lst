@@ -1,3 +1,4 @@
+ChatBotProject\repositories\UserRepository$1.class
 ChatBotProject\entities\EnergyBoostGoal.class
 ChatBotProject\controllers\HealthController.class
 ChatBotProject\entities\StayingFitRoutine.class
@@ -17,5 +18,7 @@ ChatBotProject\entities\HealthyHabitsGoal.class
 ChatBotProject\service\IUserService.class
 ChatBotProject\entities\WeightLossRoutine.class
 ChatBotProject\entities\SleepImprovementGoal.class
+ChatBotProject\utils\RuntimeTypeAdapterFactory.class
 ChatBotProject\repositories\UserRepository.class
+ChatBotProject\utils\RuntimeTypeAdapterFactory$1.class
 ChatBotProject\entities\Routine.class

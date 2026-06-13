@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "juan Perez",
+      "age": 25,
+      "weight": 70.5,
+      "height": 1.75,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        70.5
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    }
+  ]
+}

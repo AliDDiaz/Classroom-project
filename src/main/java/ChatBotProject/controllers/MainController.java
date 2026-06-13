@@ -237,129 +237,75 @@ public class MainController {
             setStatus("Ingrese un ID válido.");
         }
     }
-
     @FXML
-    private void openHealthWindow(){
-
-        try{
-
+    private void openHealthWindow() {
+        User selected = userTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            setStatus("Selecciona un usuario de la tabla primero.");
+            return;
+        }
+        try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(
-                            "/ChatBotProject/views/HealthView.fxml"
-                    )
+                    getClass().getResource("/ChatBotProject/views/HealthView.fxml")
             );
-
             Parent root = loader.load();
-
-            HealthController controller =
-                    loader.getController();
-
-            controller.setUserId(
-                    Integer.parseInt(
-                            fieldId.getText()
-                    )
-            );
-
+            HealthController controller = loader.getController();
+            controller.setUserId(selected.getId());
             Stage stage = new Stage();
-
-            stage.setTitle("Información de Salud");
-
-            stage.setScene(
-                    new Scene(root)
-            );
-
+            stage.setTitle("Salud — " + selected.getName());
+            stage.setScene(new Scene(root));
             stage.show();
-
-        }catch(Exception e){
-
+        } catch (Exception e) {
             e.printStackTrace();
-
-            setStatus(
-                    "No fue posible abrir la ventana de salud."
-            );
+            setStatus("No fue posible abrir la ventana de salud.");
         }
     }
+
     @FXML
-    private void openHabitsWindow(){
-        try{
-
+    private void openHabitsWindow() {
+        User selected = userTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            setStatus("Selecciona un usuario de la tabla primero.");
+            return;
+        }
+        try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(
-                            "/ChatBotProject/views/HabitsView.fxml"
-                    )
+                    getClass().getResource("/ChatBotProject/views/HabitsView.fxml")
             );
-
             Parent root = loader.load();
-
-            HabitsController controller =
-                    loader.getController();
-
-            controller.setUserId(
-                    Integer.parseInt(
-                            fieldId.getText().trim()
-                    )
-            );
-
+            HabitsController controller = loader.getController();
+            controller.setUserId(selected.getId());
             Stage stage = new Stage();
-
-            stage.setTitle("Habitos");
-
-            stage.setScene(
-                    new Scene(root)
-            );
-
+            stage.setTitle("Hábitos — " + selected.getName());
+            stage.setScene(new Scene(root));
             stage.show();
-
-        }catch(Exception e){
-
+        } catch (Exception e) {
             e.printStackTrace();
-
-            setStatus(
-                    "No fue posible abrir la ventana de habitos."
-            );
+            setStatus("No fue posible abrir la ventana de hábitos.");
         }
     }
     @FXML
     private void openGoalsWindow() {
+        User selected = userTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            setStatus("Selecciona un usuario de la tabla primero.");
+            return;
+        }
         try {
-
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(
-                            "/ChatBotProject/views/GoalsView.fxml"
-                    )
+                    getClass().getResource("/ChatBotProject/views/GoalsView.fxml")
             );
-
             Parent root = loader.load();
-
-            GoalsController controller =
-                    loader.getController();
-
-            controller.setUserId(
-                    Integer.parseInt(
-                            fieldId.getText().trim()
-                    )
-            );
-
+            GoalsController controller = loader.getController();
+            controller.setUserId(selected.getId());
             Stage stage = new Stage();
-
-            stage.setTitle("Objetivos");
-
-            stage.setScene(
-                    new Scene(root)
-            );
-
+            stage.setTitle("Objetivos — " + selected.getName());
+            stage.setScene(new Scene(root));
             stage.setOnHidden(e -> refreshTable());
-
             stage.show();
-
         } catch (Exception e) {
-
             e.printStackTrace();
-
-            setStatus(
-                    "No fue posible abrir la ventana de objetivos."
-            );
+            setStatus("No fue posible abrir la ventana de objetivos.");
         }
     }
-
 }
