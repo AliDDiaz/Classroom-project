@@ -33,7 +33,7 @@ public class MainController {
     @FXML private TextField fieldAge;
     @FXML private TextField fieldWeight;
     @FXML private TextField fieldHeight;
-    @FXML private TextField fieldGender;
+    @FXML private ComboBox<String> fieldGender;
 
     // ── Botones y estado ──────────────────────────────────────────────────
     @FXML private Label labelStatus;
@@ -56,6 +56,10 @@ public class MainController {
 
         userTable.setItems(tableData);
 
+        // Opciones de género
+        fieldGender.setItems(FXCollections.observableArrayList("Masculino", "Femenino"));
+        fieldGender.getSelectionModel().selectFirst();
+
         // Al hacer clic en una fila, llenar el formulario automáticamente
         userTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldVal, newVal) -> {
@@ -72,12 +76,12 @@ public class MainController {
     @FXML
     private void handleCreate() {
         try {
-            int id         = Integer.parseInt(fieldId.getText().trim());
+            int id         = service.generateNextId();
             String name    = fieldName.getText().trim();
             int age        = Integer.parseInt(fieldAge.getText().trim());
             double weight  = Double.parseDouble(fieldWeight.getText().trim());
             double height  = Double.parseDouble(fieldHeight.getText().trim());
-            String gender  = fieldGender.getText().trim();
+            String gender  = fieldGender.getValue();
 
             ArrayList<Double> history = new ArrayList<>();
             history.add(weight);
@@ -89,13 +93,15 @@ public class MainController {
             if (service.registerUser(user)) {
                 refreshTable();
                 handleClear();
-                setStatus("Usuario " + name + " registrado correctamente.");
+                setStatus("Usuario " + name + " registrado correctamente con ID " + id + ".");
             } else {
                 setStatus("Error: ID ya existe o datos inválidos.");
             }
 
         } catch (NumberFormatException e) {
-            setStatus("Error: verifica que ID, edad, peso y altura sean números.");
+            setStatus("Error: verifica que edad, peso y altura sean números.");
+        } catch (IllegalArgumentException e) {
+            setStatus("Error: " + e.getMessage());
         }
     }
 
@@ -152,7 +158,7 @@ public class MainController {
         fieldAge.clear();
         fieldWeight.clear();
         fieldHeight.clear();
-        fieldGender.clear();
+        fieldGender.getSelectionModel().selectFirst();
         userTable.getSelectionModel().clearSelection();
         setStatus("Campos limpiados.");
     }
@@ -169,7 +175,7 @@ public class MainController {
         fieldAge.setText(String.valueOf(user.getAge()));
         fieldWeight.setText(String.valueOf(user.getWeight()));
         fieldHeight.setText(String.valueOf(user.getHeight()));
-        fieldGender.setText(user.getGender());
+        fieldGender.setValue(user.getGender());
     }
 
     private void setStatus(String msg) {

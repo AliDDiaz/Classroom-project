@@ -73,7 +73,9 @@ public class UserRepository {
     }
 
     public ArrayList<User> getAll() {
-        return load();
+        ArrayList<User> list = load();
+        list.sort((a, b) -> Integer.compare(a.getId(), b.getId()));
+        return list;
     }
 
     public void getAllUsers() {
@@ -120,4 +122,33 @@ public class UserRepository {
         }
         return false;
     }
+
+    /**
+     * Devuelve el menor ID positivo que no esté en uso.
+     * Si existen los IDs 1, 3, 4 -> devuelve 2.
+     * Si existen 1, 2, 3 -> devuelve 4.
+     */
+    public int generateNextId() {
+
+        ArrayList<User> list = load();
+
+        int id = 1;
+
+        boolean exists;
+
+        do {
+
+            final int current = id;
+
+            exists = list.stream().anyMatch(u -> u.getId() == current);
+
+            if (exists) {
+                id++;
+            }
+
+        } while (exists);
+
+        return id;
+    }
+
 }

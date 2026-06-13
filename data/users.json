@@ -32,21 +32,6 @@
       "targetWeight": 0.0
     },
     {
-      "id": 3,
-      "name": "Camilo",
-      "age": 21,
-      "weight": 70.0,
-      "height": 1.78,
-      "gender": "Masculino",
-      "mainGoal": "",
-      "secondaryGoals": [],
-      "weightHistory": [
-        70.0
-      ],
-      "habits": [],
-      "targetWeight": 0.0
-    },
-    {
       "id": 4,
       "name": "José",
       "age": 32,
@@ -57,6 +42,21 @@
       "secondaryGoals": [],
       "weightHistory": [
         85.0
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 3,
+      "name": "Jhon Lennon",
+      "age": 19,
+      "weight": 76.0,
+      "height": 1.81,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        76.0
       ],
       "habits": [],
       "targetWeight": 0.0

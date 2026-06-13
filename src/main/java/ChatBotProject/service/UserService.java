@@ -34,6 +34,11 @@ public class UserService implements IUserService{
         return loggedUser;
     }
 
+    public int generateNextId(){
+
+        return repository.generateNextId();
+    }
+
     @Override
     public boolean registerUser(User user){
 
