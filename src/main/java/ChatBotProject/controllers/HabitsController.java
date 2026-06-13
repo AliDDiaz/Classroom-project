@@ -136,6 +136,13 @@ public class HabitsController {
     }
 
     @FXML
+    private void showStreak(){
+        resultArea.setText(
+                service.calculateStreak(userId)
+        );
+    }
+
+    @FXML
     private void showStatistics(){
         resultArea.setText(
                 service.habitsStatistics(userId)

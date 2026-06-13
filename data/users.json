@@ -13,27 +13,40 @@
         70.5,
         72.0
       ],
-      "habits": [],
+      "habits": [
+        {
+          "id": 1,
+          "userId": 1,
+          "name": "Caminar 30 minutos",
+          "category": "Ejercicio",
+          "completed": true,
+          "date": "2026-06-13"
+        }
+      ],
       "targetWeight": 0.0
     },
     {
       "id": 2,
       "name": "Ali",
       "age": 18,
-      "weight": 90.0,
+      "weight": 70.6,
       "height": 1.78,
       "gender": "Masculino",
       "mainGoal": "",
       "secondaryGoals": [],
       "weightHistory": [
-        90.0
+        90.0,
+        70.6,
+        70.6,
+        70.7,
+        70.6
       ],
       "habits": [],
       "targetWeight": 0.0
     },
     {
       "id": 4,
-      "name": "José",
+      "name": "Josï¿½",
       "age": 32,
       "weight": 85.0,
       "height": 1.68,
@@ -42,6 +55,22 @@
       "secondaryGoals": [],
       "weightHistory": [
         85.0
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 2,
+      "name": "omar agamez",
+      "age": 30,
+      "weight": 70.6,
+      "height": 1.8,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        70.6,
+        70.6
       ],
       "habits": [],
       "targetWeight": 0.0

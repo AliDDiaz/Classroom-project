@@ -4,6 +4,7 @@ import ChatBotProject.entities.*;
 import ChatBotProject.repositories.UserRepository;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class UserService implements IUserService{
 
@@ -417,6 +418,7 @@ public class UserService implements IUserService{
         if(user != null){
 
             user.getHabits().add(habit);
+            repository.updateUser(user);
             System.out.println("Hábito agregado correctamente.");
 
         }else{
@@ -451,7 +453,7 @@ public class UserService implements IUserService{
             if(h.getId() == habitId){
 
                 h.setCompleted(true);
-
+                repository.updateUser(user);
                 System.out.println("Hábito completado correctamente.");
                 return;
             }
@@ -500,12 +502,94 @@ public class UserService implements IUserService{
 
         if(removed){
 
+            repository.updateUser(user);
             System.out.println("Hábito eliminado correctamente.");
 
         }else{
 
             System.out.println("No existe un hábito con ese ID.");
         }
+    }
+
+    public String calculateStreak(int userId) {
+
+        User user = repository.findByCode(userId);
+
+        if (user == null) {
+            return "Usuario no encontrado.";
+        }
+
+        ArrayList<Habit> habits = user.getHabits();
+
+        if (habits.isEmpty()) {
+            return "No hay hábitos registrados para calcular la racha.";
+        }
+
+        java.util.TreeSet<LocalDate> completedDates = new java.util.TreeSet<>();
+        for (Habit h : habits) {
+            if (h.isCompleted() && h.getDate() != null) {
+                completedDates.add(h.getDate());
+            }
+        }
+
+        if (completedDates.isEmpty()) {
+            return "===== RACHA DE HÁBITOS =====\n" +
+                    "Racha actual: 0 días\n" +
+                    "Aún no has completado ningún hábito.";
+        }
+
+        LocalDate today = LocalDate.now();
+        int currentStreak = 0;
+        LocalDate check = today;
+
+        while (completedDates.contains(check)) {
+            currentStreak++;
+            check = check.minusDays(1);
+        }
+
+        if (currentStreak == 0) {
+            check = today.minusDays(1);
+            while (completedDates.contains(check)) {
+                currentStreak++;
+                check = check.minusDays(1);
+            }
+        }
+
+        int maxStreak = 0;
+        int tempStreak = 1;
+        LocalDate prev = null;
+
+        for (LocalDate date : completedDates) {
+            if (prev != null && date.equals(prev.plusDays(1))) {
+                tempStreak++;
+                maxStreak = Math.max(maxStreak, tempStreak);
+            } else {
+                tempStreak = 1;
+            }
+            prev = date;
+        }
+        maxStreak = Math.max(maxStreak, tempStreak);
+
+        String motivation;
+        if (currentStreak == 0) {
+            motivation = "¡Completa un hábito hoy para iniciar tu racha!";
+        } else if (currentStreak < 3) {
+            motivation = "¡Buen comienzo! Sigue así.";
+        } else if (currentStreak < 7) {
+            motivation = "¡Vas muy bien! Mantén el ritmo.";
+        } else if (currentStreak < 14) {
+            motivation = "¡Una semana o más! Eres constante.";
+        } else {
+            motivation = "¡Increíble disciplina! Sigue adelante.";
+        }
+
+        String emoji = currentStreak >= 7 ? "🔥" : currentStreak >= 3 ? "⭐" : "💪";
+
+        return "===== RACHA DE HÁBITOS " + emoji + " =====\n" +
+                "Racha actual:  " + currentStreak + " día(s) consecutivo(s)\n" +
+                "Racha máxima:  " + maxStreak + " día(s)\n" +
+                "Días con hábitos completados: " + completedDates.size() + "\n\n" +
+                motivation;
     }
 
     public String habitsStatistics(int userId){

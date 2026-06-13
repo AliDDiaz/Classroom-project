@@ -91,6 +91,11 @@
         <Button text="Ver estadisticas"
                 onAction="#showStatistics"
                 prefWidth="130"/>
+
+        <Button text="Ver racha"
+                onAction="#showStreak"
+                prefWidth="130"
+                style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold;"/>
     </HBox>
 
     <TextArea fx:id="resultArea"
