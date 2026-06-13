@@ -4,13 +4,59 @@
       "id": 1,
       "name": "juan Perez",
       "age": 25,
-      "weight": 70.5,
+      "weight": 72.0,
       "height": 1.75,
       "gender": "Masculino",
       "mainGoal": "",
       "secondaryGoals": [],
       "weightHistory": [
-        70.5
+        70.5,
+        72.0
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 2,
+      "name": "Ali",
+      "age": 18,
+      "weight": 90.0,
+      "height": 1.78,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        90.0
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 3,
+      "name": "Camilo",
+      "age": 21,
+      "weight": 70.0,
+      "height": 1.78,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        70.0
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 4,
+      "name": "José",
+      "age": 32,
+      "weight": 85.0,
+      "height": 1.68,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        85.0
       ],
       "habits": [],
       "targetWeight": 0.0
