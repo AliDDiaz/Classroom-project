@@ -22,3 +22,4 @@ ChatBotProject\utils\RuntimeTypeAdapterFactory.class
 ChatBotProject\repositories\UserRepository.class
 ChatBotProject\utils\RuntimeTypeAdapterFactory$1.class
 ChatBotProject\entities\Routine.class
+ChatBotProject\controllers\LoginController.class
