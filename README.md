@@ -1,4 +1,4 @@
-# 🤖 FitBot — Chatbot de Salud Física
+# 🤖 FitTracker App — Chatbot de Salud Física
 
 > Proyecto desarrollado para la **XXII Feria Tecnológica ExpoSoftware 2026**  
 > Universidad Popular del Cesar — ACEIS
@@ -19,7 +19,7 @@
 
 ## 📋 Descripción
 
-FitBot es una aplicación de escritorio desarrollada en **Java con JavaFX** que permite a los usuarios registrar su perfil físico, establecer objetivos de salud, gestionar hábitos diarios y recibir rutinas de ejercicio personalizadas. El proyecto fue desarrollado aplicando la **Metodología XP (Programación Extrema)**.
+FitTracker App es una aplicación de escritorio desarrollada en **Java con JavaFX** que permite a los usuarios registrar su perfil físico, establecer objetivos de salud, gestionar hábitos diarios y recibir rutinas de ejercicio personalizadas. El proyecto fue desarrollado aplicando la **Metodología XP (Programación Extrema)**.
 
 ---
 
