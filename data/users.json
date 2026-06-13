@@ -84,6 +84,37 @@
       ],
       "habits": [],
       "targetWeight": 0.0
+    },
+    {
+      "id": 5,
+      "name": "Joshua",
+      "age": 18,
+      "weight": 75.0,
+      "height": 1.79,
+      "gender": "Masculino",
+      "mainGoal": "Mantenerse en forma",
+      "secondaryGoals": [
+        {
+          "type": "StressReductionGoal",
+          "name": "Reducir estrés"
+        },
+        {
+          "type": "SleepImprovementGoal",
+          "name": "Mejorar sueño"
+        }
+      ],
+      "weightHistory": [],
+      "habits": [
+        {
+          "id": 1,
+          "userId": 5,
+          "name": "Trotar por las mañanas",
+          "category": "Ejercicio",
+          "completed": true,
+          "date": "2026-06-13"
+        }
+      ],
+      "targetWeight": 72.0
     }
   ]
 }

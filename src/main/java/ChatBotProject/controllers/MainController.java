@@ -79,6 +79,14 @@ public class MainController {
         try {
             int id         = service.generateNextId();
             String name    = fieldName.getText().trim();
+            if(!name.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+
+                showError(
+                        "El nombre solo puede contener letras."
+                );
+
+                return;
+            }
             int age        = Integer.parseInt(fieldAge.getText().trim());
             double weight  = Double.parseDouble(fieldWeight.getText().trim());
             double height  = Double.parseDouble(fieldHeight.getText().trim());

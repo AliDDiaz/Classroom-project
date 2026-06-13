@@ -43,6 +43,15 @@ public class RegisterController {
             String name =
                     fieldName.getText().trim();
 
+            if(!name.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+
+                showError(
+                        "El nombre solo puede contener letras."
+                );
+
+                return;
+            }
+
             if(name.isEmpty()){
 
                 statusLabel.setText(

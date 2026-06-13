@@ -293,8 +293,60 @@ public class UserDashboardController {
             response =
                     service.showProgress(userId);
 
-        }
-        else if(
+        }else if(
+                message.contains("objetivo")
+                        || message.contains("objetivos")
+                        || message.contains("metas")
+                        || message.contains("quiero lograr")
+        ){
+            response =
+                    "🎯 Información sobre tus objetivos:\n\n" +
+                            service.showGoalProgress(userId);
+        }else if(
+                message.contains("habito")
+                        || message.contains("hábito")
+                        || message.contains("habitos")
+                        || message.contains("hábitos")
+        ){
+            response =
+                    "📅 Tus hábitos registrados:\n\n" +
+                            service.habitsStatistics(userId);
+        }else if(
+                message.contains("motivame")
+                        || message.contains("motivación")
+                        || message.contains("motivar")
+                        || message.contains("desmotivado")
+        ){
+            response =
+                    "💪 Recuerda que los resultados no llegan de un día para otro.\n\n" +
+                            "La constancia siempre supera a la perfección. Sigue adelante.";
+        }else if(
+                message.contains("salud")
+                        || message.contains("como estoy")
+                        || message.contains("estado fisico")
+        ){
+            response =
+                    "🩺 Puedes revisar tu IMC, calorías recomendadas y progreso físico.\n\n" +
+                            "Pregúntame por tu IMC o tu progreso para más detalles.";
+        }else if(
+                message.contains("mi peso")
+                        || message.contains("peso actual")
+        ){
+            User user = service.findUser(userId);
+
+            response =
+                    "⚖️ Tu peso actual es: "
+                            + user.getWeight()
+                            + " kg";
+        }else if(
+                message.contains("quien eres")
+                        || message.contains("qué eres")
+                        || message.contains("que eres")
+        ){
+            response =
+                    "🤖 Soy FitBot.\n\n" +
+                            "Fui creado para ayudarte a gestionar hábitos, objetivos, progreso físico y recomendaciones de salud.";
+        }else if(
                 message.contains("rutina")
                         || message.contains("ejercicio")
                         || message.contains("entrenamiento")
