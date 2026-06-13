@@ -21,6 +21,14 @@
           "category": "Ejercicio",
           "completed": true,
           "date": "2026-06-13"
+        },
+        {
+          "id": 2,
+          "userId": 1,
+          "name": "Tomar agua",
+          "category": "Alimentacion",
+          "completed": false,
+          "date": "2026-06-13"
         }
       ],
       "targetWeight": 0.0
