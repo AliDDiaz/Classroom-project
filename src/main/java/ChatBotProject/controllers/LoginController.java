@@ -9,10 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 public class LoginController {
 
     @FXML private TextField fieldId;
     @FXML private Label labelStatus;
+    @FXML private TextField fieldAdminPassword;
 
     private final UserService service = new UserService();
 
@@ -25,7 +27,7 @@ public class LoginController {
 
             if(service.login(id)){
 
-                openMainView();
+                openUserDashboard(id);
 
             }else{
 
@@ -39,9 +41,101 @@ public class LoginController {
     }
 
     @FXML
+    private void handleAdminLogin(){
+
+        try{
+
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/ChatBotProject/views/AdminLoginView.fxml"
+                            )
+                    );
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+
+            stage.setTitle("Login Administrador");
+
+            stage.setScene(
+                    new Scene(root,300,200)
+            );
+
+            stage.show();
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+    private void openAdminPanel(){
+
+        try{
+
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/ChatBotProject/views/MainView.fxml"
+                            )
+                    );
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+
+            stage.setTitle(
+                    "Panel Administrativo"
+            );
+
+            stage.setScene(
+                    new Scene(root,800,600)
+            );
+
+            stage.show();
+
+            Stage loginStage =
+                    (Stage) fieldId.getScene().getWindow();
+
+            loginStage.close();
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void handleRegister(){
 
-        openMainView();
+        try{
+
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/ChatBotProject/views/RegisterView.fxml"
+                            )
+                    );
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+
+            stage.setTitle(
+                    "Registro"
+            );
+
+            stage.setScene(
+                    new Scene(root)
+            );
+
+            stage.show();
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
     }
 
     private void openMainView(){
@@ -74,6 +168,49 @@ public class LoginController {
             e.printStackTrace();
 
             labelStatus.setText("No fue posible abrir la aplicación.");
+        }
+    }
+
+    private void openUserDashboard(int userId){
+
+        try{
+
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/ChatBotProject/views/UserDashboard.fxml"
+                            )
+                    );
+
+            Parent root = loader.load();
+
+            UserDashboardController controller =
+                    loader.getController();
+
+            controller.setUserId(userId);
+
+            Stage stage = new Stage();
+
+            stage.setTitle("Panel Principal");
+
+            stage.setScene(
+                    new Scene(root)
+            );
+
+            stage.show();
+
+            Stage loginStage =
+                    (Stage) fieldId.getScene().getWindow();
+
+            loginStage.close();
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+            labelStatus.setText(
+                    "No fue posible abrir el panel."
+            );
         }
     }
 }

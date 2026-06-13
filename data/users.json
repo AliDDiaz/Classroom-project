@@ -7,8 +7,17 @@
       "weight": 72.0,
       "height": 1.75,
       "gender": "Masculino",
-      "mainGoal": "",
-      "secondaryGoals": [],
+      "mainGoal": "Mantenerse en forma",
+      "secondaryGoals": [
+        {
+          "type": "SleepImprovementGoal",
+          "name": "Mejorar sueño"
+        },
+        {
+          "type": "EnergyBoostGoal",
+          "name": "Aumentar energía"
+        }
+      ],
       "weightHistory": [
         70.5,
         72.0
@@ -34,25 +43,6 @@
       "targetWeight": 0.0
     },
     {
-      "id": 2,
-      "name": "Ali",
-      "age": 18,
-      "weight": 70.6,
-      "height": 1.78,
-      "gender": "Masculino",
-      "mainGoal": "",
-      "secondaryGoals": [],
-      "weightHistory": [
-        90.0,
-        70.6,
-        70.6,
-        70.7,
-        70.6
-      ],
-      "habits": [],
-      "targetWeight": 77.0
-    },
-    {
       "id": 4,
       "name": "Josï¿½",
       "age": 32,
@@ -68,18 +58,15 @@
       "targetWeight": 0.0
     },
     {
-      "id": 2,
-      "name": "omar agamez",
-      "age": 30,
-      "weight": 70.6,
-      "height": 1.8,
+      "id": 3,
+      "name": "Amilkar",
+      "age": 33,
+      "weight": 75.0,
+      "height": 1.65,
       "gender": "Masculino",
       "mainGoal": "",
       "secondaryGoals": [],
-      "weightHistory": [
-        70.6,
-        70.6
-      ],
+      "weightHistory": [],
       "habits": [],
       "targetWeight": 0.0
     }

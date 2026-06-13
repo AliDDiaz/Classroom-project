@@ -3,6 +3,7 @@ ChatBotProject\entities\EnergyBoostGoal.class
 ChatBotProject\controllers\HealthController.class
 ChatBotProject\entities\StayingFitRoutine.class
 ChatBotProject\entities\SecondaryGoals.class
+ChatBotProject\controllers\AdminLoginController.class
 ChatBotProject\entities\User.class
 ChatBotProject\entities\StressReductionGoal.class
 ChatBotProject\entities\ImproveResistenceRoutine.class
@@ -16,10 +17,12 @@ ChatBotProject\entities\IncreaseFlexibilityRoutine.class
 ChatBotProject\controllers\GoalsController.class
 ChatBotProject\entities\HealthyHabitsGoal.class
 ChatBotProject\service\IUserService.class
+ChatBotProject\controllers\RegisterController.class
 ChatBotProject\entities\WeightLossRoutine.class
 ChatBotProject\entities\SleepImprovementGoal.class
 ChatBotProject\utils\RuntimeTypeAdapterFactory.class
 ChatBotProject\repositories\UserRepository.class
 ChatBotProject\utils\RuntimeTypeAdapterFactory$1.class
+ChatBotProject\controllers\UserDashboardController.class
 ChatBotProject\entities\Routine.class
 ChatBotProject\controllers\LoginController.class

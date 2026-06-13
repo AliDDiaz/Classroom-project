@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ChatBotProject.controllers.AdminLoginController"
+      alignment="CENTER"
+      spacing="15">
+
+    <Label text="Acceso Administrador"/>
+
+    <PasswordField fx:id="passwordField"
+                   promptText="Contraseña"/>
+
+    <Button text="Ingresar"
+            onAction="#loginAdmin"/>
+
+    <Label fx:id="statusLabel"/>
+
+</VBox>

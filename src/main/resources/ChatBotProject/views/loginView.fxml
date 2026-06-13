@@ -38,6 +38,9 @@
             prefWidth="200"
             style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"/>
 
+    <Button text="Administrador"
+            onAction="#handleAdminLogin"/>
+
     <Label fx:id="labelStatus"
            text=""
            style="-fx-text-fill: #c0392b; -fx-font-size: 12px;"/>
