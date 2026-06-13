@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 
@@ -40,22 +41,67 @@ public class RegisterController {
                     service.generateNextId();
 
             String name =
-                    fieldName.getText();
+                    fieldName.getText().trim();
+
+            if(name.isEmpty()){
+
+                statusLabel.setText(
+                        "Ingrese un nombre."
+                );
+
+                return;
+            }
 
             int age =
                     Integer.parseInt(
-                            fieldAge.getText()
+                            fieldAge.getText().trim()
                     );
+
+            if(age < 10 || age > 120){
+
+                statusLabel.setText(
+                        "Edad fuera de rango."
+                );
+
+                return;
+            }
 
             double weight =
                     Double.parseDouble(
-                            fieldWeight.getText()
+                            fieldWeight.getText().trim()
                     );
+
+            if(weight <= 0){
+
+                statusLabel.setText(
+                        "Peso inválido."
+                );
+
+                return;
+            }
 
             double height =
                     Double.parseDouble(
-                            fieldHeight.getText()
+                            fieldHeight.getText().trim()
                     );
+
+            if(height <= 0){
+
+                statusLabel.setText(
+                        "Altura inválida."
+                );
+
+                return;
+            }
+
+            if(fieldGender.getValue() == null){
+
+                statusLabel.setText(
+                        "Seleccione un género."
+                );
+
+                return;
+            }
 
             User user =
                     new User(
@@ -75,15 +121,52 @@ public class RegisterController {
             service.registerUser(user);
 
             statusLabel.setText(
-                    "Cuenta creada. Tu ID es: "
-                            + id
+                    "Cuenta creada. Tu ID es: " + id
+            );
+
+            fieldName.clear();
+            fieldAge.clear();
+            fieldWeight.clear();
+            fieldHeight.clear();
+            fieldGender.setValue(null);
+
+        }catch(NumberFormatException e){
+
+            statusLabel.setText(
+                    "Edad, peso y altura deben ser números."
             );
 
         }catch(Exception e){
 
             statusLabel.setText(
-                    "Datos inválidos."
+                    e.getMessage()
             );
         }
+    }
+
+    private void showError(String message){
+
+        Alert alert = new Alert(
+                Alert.AlertType.ERROR
+        );
+
+        alert.setTitle("Error");
+        alert.setHeaderText("Datos inválidos");
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+    private void showSuccess(String message){
+
+        Alert alert = new Alert(
+                Alert.AlertType.INFORMATION
+        );
+
+        alert.setTitle("Éxito");
+        alert.setHeaderText("Cuenta creada");
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }

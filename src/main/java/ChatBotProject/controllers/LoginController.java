@@ -23,6 +23,15 @@ public class LoginController {
 
         try{
 
+            if(fieldId.getText().trim().isEmpty()){
+
+                labelStatus.setText(
+                        "Ingrese un ID."
+                );
+
+                return;
+            }
+
             int id = Integer.parseInt(fieldId.getText().trim());
 
             if(service.login(id)){

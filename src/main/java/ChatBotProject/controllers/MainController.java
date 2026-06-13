@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class MainController {
 
         // Opciones de género
         fieldGender.setItems(FXCollections.observableArrayList("Masculino", "Femenino"));
-        fieldGender.getSelectionModel().selectFirst();
+        //fieldGender.getSelectionModel().selectFirst();
 
         // Al hacer clic en una fila, llenar el formulario automáticamente
         userTable.getSelectionModel().selectedItemProperty().addListener(
@@ -83,6 +84,39 @@ public class MainController {
             double height  = Double.parseDouble(fieldHeight.getText().trim());
             String gender  = fieldGender.getValue();
 
+            if(name.isEmpty()){
+
+                showError("Debe ingresar un nombre.");
+                return;
+            }
+
+            if(age < 10 || age > 120){
+
+                showError(
+                        "La edad debe estar entre 10 y 120 años."
+                );
+
+                return;
+            }
+
+            if(weight <= 0){
+
+                showError("El peso debe ser mayor que cero.");
+                return;
+            }
+
+            if(height <= 0){
+
+                showError("La altura debe ser mayor que cero.");
+                return;
+            }
+
+            if(gender == null){
+
+                showError("Seleccione un género.");
+                return;
+            }
+
             ArrayList<Double> history = new ArrayList<>();
             history.add(weight);
             ArrayList<Habit> habits = new ArrayList<>();
@@ -93,13 +127,18 @@ public class MainController {
             if (service.registerUser(user)) {
                 refreshTable();
                 handleClear();
-                setStatus("Usuario " + name + " registrado correctamente con ID " + id + ".");
+                showSuccess(
+                        "Usuario registrado correctamente.\nID asignado: "
+                                + id
+                );
             } else {
-                setStatus("Error: ID ya existe o datos inválidos.");
+                showError("No fue posible registrar el usuario.");
             }
 
         } catch (NumberFormatException e) {
-            setStatus("Error: verifica que edad, peso y altura sean números.");
+            showError(
+                    "Edad, peso y altura deben ser numéricos."
+            );
         } catch (IllegalArgumentException e) {
             setStatus("Error: " + e.getMessage());
         }
@@ -108,13 +147,26 @@ public class MainController {
     @FXML
     private void handleDelete() {
         try {
+
+            if(fieldId.getText().trim().isEmpty()){
+
+                showError("Ingrese un ID.");
+
+                return;
+            }
+
             int id = Integer.parseInt(fieldId.getText().trim());
             if (service.deleteUser(id)) {
                 refreshTable();
                 handleClear();
-                setStatus("Usuario #" + id + " eliminado.");
+                showSuccess(
+                        "Usuario eliminado correctamente."
+                );
             } else {
-                setStatus("No existe un usuario con ID " + id + ".");
+                showError(
+                        "No existe un usuario con ID "
+                                + id
+                );
             }
         } catch (NumberFormatException e) {
             setStatus("Error: ingresa un ID numérico.");
@@ -123,20 +175,64 @@ public class MainController {
 
     @FXML
     private void handleUpdate() {
+
+        if(fieldId.getText().trim().isEmpty()){
+
+            showError("Ingrese un ID.");
+
+            return;
+        }
+
         try {
-            int id        = Integer.parseInt(fieldId.getText().trim());
-            double weight = Double.parseDouble(fieldWeight.getText().trim());
+
+            int id =
+                    Integer.parseInt(
+                            fieldId.getText().trim()
+                    );
+
+            double weight =
+                    Double.parseDouble(
+                            fieldWeight.getText().trim()
+                    );
+
+            if(weight <= 0){
+
+                showError(
+                        "El peso debe ser mayor que cero."
+                );
+
+                return;
+            }
+
+
+
             service.updateWeight(weight, id);
+
             refreshTable();
-            setStatus("Peso actualizado para usuario #" + id + ".");
-        } catch (NumberFormatException e) {
-            setStatus("Error: ID y peso deben ser numéricos.");
+
+            showSuccess(
+                    "Peso actualizado correctamente."
+            );
+
+        } catch (Exception e){
+
+            showError(
+                    "Ingrese datos válidos."
+            );
         }
     }
 
     @FXML
     private void handleSearch() {
         try {
+
+            if(fieldId.getText().trim().isEmpty()){
+
+                showError("Ingrese un ID.");
+
+                return;
+            }
+
             int id   = Integer.parseInt(fieldId.getText().trim());
             User user = service.findUser(id);
             if (user != null) {
@@ -158,7 +254,7 @@ public class MainController {
         fieldAge.clear();
         fieldWeight.clear();
         fieldHeight.clear();
-        fieldGender.getSelectionModel().selectFirst();
+        fieldGender.setValue(null);
         userTable.getSelectionModel().clearSelection();
         setStatus("Campos limpiados.");
     }
@@ -189,6 +285,13 @@ public class MainController {
     @FXML
     private void handleHistory(){
 
+        if(fieldId.getText().trim().isEmpty()){
+
+            setStatus("Ingrese un ID.");
+
+            return;
+        }
+
         try{
 
             int id = Integer.parseInt(
@@ -206,6 +309,13 @@ public class MainController {
     @FXML
     private void handleProgress(){
 
+        if(fieldId.getText().trim().isEmpty()){
+
+            setStatus("Ingrese un ID.");
+
+            return;
+        }
+
         try{
 
             int id = Integer.parseInt(
@@ -222,6 +332,13 @@ public class MainController {
 
     @FXML
     private void handleIMC(){
+
+        if(fieldId.getText().trim().isEmpty()){
+
+            setStatus("Ingrese un ID.");
+
+            return;
+        }
 
         try{
 
@@ -313,5 +430,31 @@ public class MainController {
             e.printStackTrace();
             setStatus("No fue posible abrir la ventana de objetivos.");
         }
+    }
+
+    private void showError(String message){
+
+        Alert alert = new Alert(
+                Alert.AlertType.ERROR
+        );
+
+        alert.setTitle("Error");
+        alert.setHeaderText("Operación inválida");
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+    private void showSuccess(String message){
+
+        Alert alert = new Alert(
+                Alert.AlertType.INFORMATION
+        );
+
+        alert.setTitle("Éxito");
+        alert.setHeaderText("Operación realizada correctamente");
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }

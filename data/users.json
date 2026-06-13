@@ -43,21 +43,6 @@
       "targetWeight": 0.0
     },
     {
-      "id": 4,
-      "name": "Jos�",
-      "age": 32,
-      "weight": 85.0,
-      "height": 1.68,
-      "gender": "Masculino",
-      "mainGoal": "",
-      "secondaryGoals": [],
-      "weightHistory": [
-        85.0
-      ],
-      "habits": [],
-      "targetWeight": 0.0
-    },
-    {
       "id": 3,
       "name": "Amilkar",
       "age": 33,
@@ -67,6 +52,36 @@
       "mainGoal": "",
       "secondaryGoals": [],
       "weightHistory": [],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 4,
+      "name": "Ali",
+      "age": 18,
+      "weight": 90.0,
+      "height": 1.78,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        90.0
+      ],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 2,
+      "name": "Bruno",
+      "age": 19,
+      "weight": 73.0,
+      "height": 1.75,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [
+        73.0
+      ],
       "habits": [],
       "targetWeight": 0.0
     }
