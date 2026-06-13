@@ -6,31 +6,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ChatBotProject.controllers.RegisterController"
-      spacing="10"
-      alignment="CENTER">
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChatBotProject.controllers.RegisterController">
 
-    <Label text="Registro de Usuario"/>
+    <Label text="Registro de Usuario" />
 
-    <TextField fx:id="fieldName"
-               promptText="Nombre"/>
+    <TextField fx:id="fieldName" promptText="Nombre" />
 
-    <TextField fx:id="fieldAge"
-               promptText="Edad"/>
+    <TextField fx:id="fieldAge" promptText="Edad" />
 
-    <TextField fx:id="fieldWeight"
-               promptText="Peso"/>
+    <TextField fx:id="fieldWeight" promptText="Peso" />
 
-    <TextField fx:id="fieldHeight"
-               promptText="Altura"/>
+    <TextField fx:id="fieldHeight" promptText="Altura" />
 
-    <ComboBox fx:id="fieldGender"/>
+    <ComboBox fx:id="fieldGender" promptText="genero" />
 
-    <Button text="Crear Cuenta"
-            onAction="#register"/>
+    <Button onAction="#register" text="Crear Cuenta" />
 
-    <Label fx:id="statusLabel"/>
+    <Label fx:id="statusLabel" />
 
 </VBox>
