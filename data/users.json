@@ -50,7 +50,7 @@
         70.6
       ],
       "habits": [],
-      "targetWeight": 0.0
+      "targetWeight": 77.0
     },
     {
       "id": 4,
@@ -79,21 +79,6 @@
       "weightHistory": [
         70.6,
         70.6
-      ],
-      "habits": [],
-      "targetWeight": 0.0
-    },
-    {
-      "id": 3,
-      "name": "Jhon Lennon",
-      "age": 19,
-      "weight": 76.0,
-      "height": 1.81,
-      "gender": "Masculino",
-      "mainGoal": "",
-      "secondaryGoals": [],
-      "weightHistory": [
-        76.0
       ],
       "habits": [],
       "targetWeight": 0.0

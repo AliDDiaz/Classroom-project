@@ -325,12 +325,13 @@ public class UserService implements IUserService{
         User user = repository.findByCode(userId);
 
         if(user == null){
-
             System.out.println("Usuario no encontrado.");
             return;
         }
 
         user.setTargetWeight(targetWeight);
+
+        repository.updateUser(user);
 
         System.out.println(
                 "Meta de peso configurada correctamente.");
@@ -384,12 +385,17 @@ public class UserService implements IUserService{
 
     @Override
     public void assignMainGoal(int userId, String goal){
+
         User user = repository.findByCode(userId);
 
-        if (user != null){
+        if(user != null){
+
             user.setMainGoal(goal);
+
+            repository.updateUser(user);
         }
     }
+
     @Override
     public void addSecondaryGoal(int userId, SecondaryGoals goal){
 
@@ -407,6 +413,8 @@ public class UserService implements IUserService{
             }
 
             user.getSecondaryGoals().add(goal);
+            repository.updateUser(user);
+
             System.out.println("Objetivo agregado correctamente.");
         }
     }
