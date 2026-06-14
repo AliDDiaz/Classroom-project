@@ -115,6 +115,32 @@
         }
       ],
       "targetWeight": 72.0
+    },
+    {
+      "id": 6,
+      "name": "Daniel Machado",
+      "age": 24,
+      "weight": 100.0,
+      "height": 1.86,
+      "gender": "Masculino",
+      "mainGoal": "Perder peso",
+      "secondaryGoals": [],
+      "weightHistory": [],
+      "habits": [],
+      "targetWeight": 0.0
+    },
+    {
+      "id": 7,
+      "name": "adbr",
+      "age": 30,
+      "weight": 70.0,
+      "height": 1.9,
+      "gender": "Masculino",
+      "mainGoal": "",
+      "secondaryGoals": [],
+      "weightHistory": [],
+      "habits": [],
+      "targetWeight": 0.0
     }
   ]
 }
